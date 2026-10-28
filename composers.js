@@ -28,9 +28,9 @@
   function build() {
     renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.setSize(innerWidth, innerHeight); $('scene').append(renderer.domElement);
     scene = new THREE.Scene(); camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 300);
-    const wide = innerWidth > 760; camera.position.set(wide ? 10 : 12, 8, 19);
+    const wide = innerWidth > 760; camera.position.set(wide ? 10 : 12, 8, 21);
     controls = new THREE.OrbitControls(camera, renderer.domElement); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 4; controls.maxDistance = 60;
-    controls.target.set(wide ? -2.2 : 0, 0, 0);
+    controls.target.set(wide ? 0.9 : 0, 0, 0);
     scene.add(new THREE.HemisphereLight(0xffffff, 0x666a70, 0.9)); const sun = new THREE.DirectionalLight(0xffffff, 0.7); sun.position.set(6, 10, 8); scene.add(sun);
     // frame: floor grid, box edges, three axes through the origin
     const gp = []; for (let i = -S; i <= S + 1e-6; i += S / 4) { gp.push(-S, -S, i, S, -S, i, i, -S, -S, i, -S, S); }
@@ -104,6 +104,15 @@
     const hdr = document.createElement('tr'); for (const h of ['', ...(k === 'fa' ? ['F1', 'F2', 'F3'] : ['PC1', 'PC2', 'PC3'])]) { const td = document.createElement('td'); td.textContent = h; td.style.fontWeight = '600'; hdr.append(td); } tb.append(hdr);
     D.features.forEach((f, r) => { const tr = document.createElement('tr'); const n = document.createElement('td'); n.textContent = f; tr.append(n); for (let j = 0; j < 3; j++) { const v = L[r][j]; const td = document.createElement('td'); const bar = document.createElement('span'); bar.className = 'bar'; bar.style.width = `${Math.abs(v) * 34}px`; bar.style.background = v >= 0 ? t.hi : t.axis; bar.style.opacity = Math.abs(v) >= 0.4 ? 1 : 0.45; td.append(bar, document.createTextNode(' ' + (v >= 0 ? '+' : '−') + Math.abs(v).toFixed(2))); tr.append(td); } tb.append(tr); });
     $('loadTitle').textContent = k === 'fa' ? 'Factor loadings (varimax)' : 'PCA loadings';
+    // legend: axis meanings
+    const KEY = k === 'fa'
+      ? [['Left ↔ right', 'Fifth-driven, cadential. Right: descending fifths, sevenths, V → I. Left: steps, thirds, bVII → I.'],
+         ['Front ↔ back', 'Chromatic, extended. Back: chromatic roots, non-diatonic chords, sevenths, 9ths. Front: plain diatonic triads.'],
+         ['Down ↔ up', 'Plagal, tonic-centred. Up: IV → I, time on the tonic. Down: varied chords, V → I.']]
+      : [0, 1, 2].map((j) => { const lo = D.features.map((f, r) => [f, A.loadings[r][j]]).sort((a, b) => b[1] - a[1]); return [['Left ↔ right', 'Front ↔ back', 'Down ↔ up'][j], `PC${j + 1}, ${Math.round(A.explained[j] * 100)}% of variance. High: ${lo.slice(0, 3).map((x) => x[0]).join(', ')}. Low: ${lo.slice(-2).map((x) => x[0]).join(', ')}.`]; });
+    const ka = $('keyAxes'); ka.replaceChildren(); for (const [a, b] of KEY) { const x = document.createElement('span'); x.textContent = a; const y = document.createElement('span'); y.textContent = b; ka.append(x, y); }
+    $('keyAxesTitle').textContent = k === 'fa' ? 'Axes · factor analysis' : 'Axes · PCA';
+    $('keyAxesNote').textContent = k === 'fa' ? 'Scores are relative to the average composer (0 at the centre). The three factors capture about 40% of the shared variation in the 14 measures.' : `The three components explain ${Math.round((A.explained[0] + A.explained[1] + A.explained[2]) * 100)}% of the variance but mix several ideas each.`;
   }
   function select(i) {
     state.sel = i; const c = comps[i], t = THEMES[state.theme]; $('selection').hidden = false; $('selSwatch').style.background = t.cl[c.cluster];
@@ -137,6 +146,8 @@
     $('drops').addEventListener('change', (e) => { state.drops = e.target.checked; restyle(); });
     $('centres').addEventListener('change', (e) => { state.centres = e.target.checked; });
     $('selClose').addEventListener('click', clearSel);
+    $('keyToggle').addEventListener('click', () => { const k = $('key'); k.classList.toggle('collapsed'); $('keyToggle').setAttribute('aria-expanded', String(!k.classList.contains('collapsed'))); });
+    if (innerWidth <= 1100) { $('key').classList.add('collapsed'); $('keyToggle').setAttribute('aria-expanded', 'false'); }
     $('panelToggle').addEventListener('click', () => { const p = $('panel'); p.classList.toggle('collapsed'); $('panelToggle').setAttribute('aria-expanded', String(!p.classList.contains('collapsed'))); });
     if (innerWidth <= 760) { $('panel').classList.add('collapsed'); $('panelToggle').setAttribute('aria-expanded', 'false'); }
   }

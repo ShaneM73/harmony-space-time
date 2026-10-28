@@ -26,6 +26,20 @@
     .loadings { width: 100%; border-collapse: collapse; font-size: 11px; font-variant-numeric: tabular-nums; margin-top: 4px; }
     .loadings td { padding: 2px 4px; } .loadings td:first-child { color: var(--muted); }
     .loadings .bar { display: inline-block; height: 7px; border-radius: 2px; vertical-align: middle; }
+    #key { position: fixed; top: 16px; right: 16px; width: 290px; max-height: calc(100% - 32px); overflow-y: auto; padding: 14px 16px 12px; background: var(--panel); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); font-size: 12px; }
+    #key h2 { margin: 0 0 8px; font-size: 13px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+    #key dl { margin: 0; display: grid; gap: 9px; }
+    #key dt { font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+    #key dd { margin: 0; line-height: 1.45; }
+    #key dd b { font-weight: 600; }
+    #key .ax { display: grid; grid-template-columns: 64px 1fr; gap: 2px 8px; }
+    #key .ax span:nth-child(odd) { color: var(--muted); }
+    #key .sym { display: inline-flex; gap: 10px; flex-wrap: wrap; }
+    #key .sizes { display: flex; align-items: flex-end; gap: 10px; margin-top: 4px; color: var(--muted); font-size: 10.5px; }
+    #key .sizes i { display: inline-block; border-radius: 50%; background: var(--muted); margin-right: 3px; vertical-align: middle; }
+    #key.collapsed dl { display: none; }
+    @media (max-width: 1100px) { #key { top: auto; bottom: 16px; max-height: 45%; } }
+    @media (max-width: 760px) { #key { left: 10px; right: 10px; width: auto; bottom: 10px; } }
   </style>
 </head>
 <body>
@@ -85,12 +99,26 @@
     <p class="credit">Designed by <b>Prof. Xin (Shane) Miao</b>, Missouri State University · <a href="https://github.com/ShaneM73/harmony-space-time" target="_blank" rel="noopener">GitHub</a></p>
   </aside>
 
+  <aside id="key" aria-label="How to read this map">
+    <h2>How to read this map <button id="keyToggle" class="icon-btn" aria-label="Collapse legend" aria-expanded="true"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></h2>
+    <dl>
+      <div><dt>Each marker</dt><dd>One composer or artist with at least five analysed pieces (136 in all), placed by the average harmony of their pieces.</dd></div>
+      <div><dt id="keyAxesTitle">Axes · factor analysis</dt><dd><div class="ax" id="keyAxes"></div><div id="keyAxesNote" style="margin-top:4px;color:var(--muted)"></div></dd></div>
+      <div><dt>Colour = harmonic group</dt><dd>Six clusters from Ward clustering on all 14 harmonic measures. The groups were found on all 14 measures, not on these three axes, so a colour can look a little scattered here.</dd></div>
+      <div><dt>Shape = genre</dt><dd class="sym"><span>● classical</span><span>■ jazz</span><span>▲ rock &amp; pop</span></dd></div>
+      <div><dt>Size = pieces analysed</dt><dd>Grows with the logarithm of the number of pieces in the corpora: 561 pieces (Bach) is about 2.3× the width of 5. It shows coverage, not importance; bigger markers are more reliable averages. Turn off “Size by pieces” for equal sizes.
+        <div class="sizes"><span><i style="width:7px;height:7px"></i>5</span><span><i style="width:10px;height:10px"></i>20</span><span><i style="width:12px;height:12px"></i>60</span><span><i style="width:14px;height:14px"></i>200</span><span><i style="width:16px;height:16px"></i>561</span></div></dd></div>
+      <div><dt>Faded = border member</dt><dd>Stays with its group in under half of 300 bootstrap re-runs of the clustering (e.g. Monteverdi, Schütz, Marvin Gaye).</dd></div>
+      <div><dt>Lines and labels</dt><dd>Thin lines drop each marker to the floor to show depth. Chips mark each group’s centre. Names show for composers with 15+ pieces; hover or click for any other.</dd></div>
+    </dl>
+  </aside>
+
   <div id="tooltip" hidden></div>
   <div id="loading"><div class="spinner"></div><span>Loading the map…</span></div>
 
   <script src="vendor/three.min.js"></script>
   <script src="vendor/OrbitControls.js"></script>
   <script src="vendor/d3.min.js"></script>
-  <script src="composers.js?v=2"></script>
+  <script src="composers.js?v=3"></script>
 </body>
 </html>
