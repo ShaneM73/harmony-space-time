@@ -6,7 +6,7 @@ Inputs (paths given on the command line, see README):
   --etopo   directory with etopo20data.gz / etopo20lons.gz / etopo20lats.gz (matplotlib/basemap doc/examples)
   --europe  the European_spatiotemporal_geography repo: data/terrain.png (5 km LAEA) + data/boundaries.json (meta)
   --geo     directory with countries.geojson and land.geojson (world-atlas 50m, countries carry a palette index 'c')
-Outputs: data/terrain.png (R/G = elevation + 6000 m, B = land mask), data/map_texture.jpg, data/basemap_meta.json
+Outputs: data/terrain.png (R/G = elevation + 6000 m, B = land mask), data/map_texture_{dark,light}.jpg, data/basemap_meta.json
 """
 import argparse, gzip, json, math, os
 import numpy as np
@@ -21,8 +21,12 @@ LON = (-130.0, 45.0); LAT = (12.0, 70.0)
 RES_ELEV = 1 / 6          # degrees per elevation cell (mesh)
 RES_TEX = 1 / 16          # degrees per texture pixel
 OFFSET = 6000
-PALETTE = ['#857558', '#62775a', '#8f675f', '#5f7189', '#857d56', '#75657f', '#537c77', '#8f7853', '#727260', '#885e5d']
-OCEAN = '#1b252c'; UNCLAIMED = '#2b2e31'; BORDER = (16, 19, 22); HILL_ALPHA = 0.65
+THEMES = {  # same palettes as European_spatiotemporal_geography
+    'dark': dict(palette=['#857558', '#62775a', '#8f675f', '#5f7189', '#857d56', '#75657f', '#537c77', '#8f7853', '#727260', '#885e5d'],
+                 ocean='#1b252c', unclaimed='#2b2e31', border=(16, 19, 22), hill=0.65),
+    'light': dict(palette=['#d9c7a7', '#b5c9a8', '#e3bcae', '#b8c7da', '#ddd3a3', '#c9b6d2', '#a6cbc4', '#e6c7a0', '#c2c1a8', '#d7aaa9'],
+                  ocean='#dae3e7', unclaimed='#e9e7df', border=(255, 255, 255), hill=0.6),
+}
 
 # ---------------------------------------------------------------- elevation grids
 def grid(res):
@@ -125,18 +129,17 @@ hill_e = np.clip(0.5 + 0.5 * hs_e / math.sin(alt), 0, 1)
 hill_up = np.asarray(Image.fromarray((hill_e * 255).astype(np.uint8)).resize((len(lons_t), len(lats_t)), Image.BICUBIC)).astype(float) / 255
 hill = np.where(np.isnan(eu_t), hill_up, hill); hill = np.where(land_t > 0, hill, 1.0)
 hex2rgb = lambda h: np.array([int(h[i:i + 2], 16) for i in (1, 3, 5)], float)
-pal = np.array([hex2rgb(UNCLAIMED)] + [hex2rgb(c) for c in PALETTE])
-tex = pal[np.clip(cidx, 0, len(pal) - 1)]
-tex = np.where(land_t[:, :, None] > 0, tex, hex2rgb(OCEAN)[None, None, :])
-tex = tex * (1 - HILL_ALPHA + HILL_ALPHA * hill[:, :, None])
-img = Image.fromarray(np.clip(tex, 0, 255).astype(np.uint8), "RGB")
-# borders: country-index edges, stroked thin in the border colour
 edge = (cidx != np.roll(cidx, 1, 1)) | (cidx != np.roll(cidx, 1, 0))
 edge &= (land_t > 0) & (np.roll(land_t, 1, 1) > 0) & (np.roll(land_t, 1, 0) > 0)
-arr = np.asarray(img).copy(); arr[edge] = (arr[edge] * 0.35 + np.array(BORDER) * 0.65).astype(np.uint8)
-img = Image.fromarray(arr, "RGB")
-img.save(f"{a.out}/map_texture.jpg", quality=82, optimize=True)
-print("map_texture.jpg", img.size, os.path.getsize(f"{a.out}/map_texture.jpg"), "bytes")
+for name, T in THEMES.items():
+    pal = np.array([hex2rgb(T['unclaimed'])] + [hex2rgb(c) for c in T['palette']])
+    tex = pal[np.clip(cidx, 0, len(pal) - 1)]
+    tex = np.where(land_t[:, :, None] > 0, tex, hex2rgb(T['ocean'])[None, None, :])
+    tex = tex * (1 - T['hill'] + T['hill'] * hill[:, :, None])
+    arr = np.clip(tex, 0, 255).astype(np.uint8).copy()
+    arr[edge] = (arr[edge] * 0.3 + np.array(T['border']) * 0.7).astype(np.uint8)
+    img = Image.fromarray(arr, "RGB"); img.save(f"{a.out}/map_texture_{name}.jpg", quality=82, optimize=True)
+    print(f"map_texture_{name}.jpg", img.size, os.path.getsize(f"{a.out}/map_texture_{name}.jpg"), "bytes")
 json.dump(dict(lon=LON, lat=LAT, elevSize=[len(lons_e), len(lats_e)], elevationOffset=OFFSET, texSize=list(img.size),
                sources=["ETOPO 20-minute grid (NOAA, via matplotlib/basemap examples)", "European_spatiotemporal_geography terrain.png (AWS Terrain Tiles, 5 km LAEA) for Europe, North Africa and the Near East", "world-atlas 50m land and countries (Natural Earth)"]),
           open(f"{a.out}/basemap_meta.json", "w"))

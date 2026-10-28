@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" class="doc">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Findings · Harmony in Space and Time</title>
+  <meta name="description" content="How chords evolved from 1565 to 2007 across classical, jazz and rock: seventh chords, the dominant, chromaticism, vocabulary, three grammars, a composer map, scenes and Mantel tests.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="style.css?v=2">
+  <style>:root { --iv: #0f766e; --bvii: #7c3aed; } :root[data-theme="dark"] { --iv: #4fd1c5; --bvii: #b794f6; }</style>
+</head>
+<body class="doc">
+<main>
+  <div class="topbar">
+    <div><p class="eyebrow">Corpus study · 1565 – 2007</p><h1>Harmony in Space and Time — the findings</h1></div>
+    <div class="links"><a href="index.html">◀ Back to the cube</a><a href="https://github.com/ShaneM73/harmony-space-time" target="_blank" rel="noopener">GitHub ↗</a><button id="themeBtn" class="btn ghost" type="button">Dark theme</button></div>
+  </div>
+  <p class="lede">3,539 analysed pieces, from Goudimel's psalms to bebop and 1980s pop, reduced to one set of chord features and placed where and when they were made. Harmony is organised by time in every genre, and by place in almost none.</p>
+  <nav><a href="#f1">Sevenths</a><a href="#f2">The dominant</a><a href="#f3">Chromaticism</a><a href="#f4">Vocabulary</a><a href="#f5">Three grammars</a><a href="#composers">Composer map</a><a href="#scenes">Scenes</a><a href="#mantel">Time or place?</a><a href="#method">Method</a></nav>
+  <div class="tiles">
+    <div class="tile"><b id="t-pieces">—</b><span>pieces analysed</span></div>
+    <div class="tile"><b id="t-chords">—</b><span>chord events</span></div>
+    <div class="tile"><b id="t-located">—</b><span>pieces located in space-time</span></div>
+    <div class="tile"><b id="t-scenes">—</b><span>space-time scenes</span></div>
+    <div class="tile"><b id="t-units">—</b><span>composers &amp; artists mapped</span></div>
+  </div>
+<section id="f1">
+  <h2>1. Seventh chords go from exception to default</h2>
+  <p>Share of chord events with a seventh or higher extension, mean over pieces, with 95% bootstrap bands. Classical periods are 25-year bins of composition date; jazz and rock/pop are decades.</p>
+  <div class="grid2">
+    <div class="panelbox"><h3>Chords with a seventh or extension</h3><div class="key"><span><i style="background:var(--classical)"></i>Classical</span><span><i style="background:var(--jazz)"></i>Jazz</span><span><i style="background:var(--rock)"></i>Rock &amp; pop</span></div><div class="chart" id="ch-seventh"></div></div>
+    <div class="panelbox"><h3>Ninths, elevenths, thirteenths</h3><p class="small muted">Under 2% before 1800; 18% in early-20th-century classical music; 12% in post-bop.</p><div class="chart" id="ch-extended"></div></div>
+  </div>
+  <p>Goudimel's 1565 psalms contain no sevenths; Corelli (1680s) uses them in 22% of chords; Bach to Beethoven sit at 25–34%; Chopin, Grieg and Tchaikovsky pass 45%; Bartók 69%, Schulhoff 96%. Jazz starts where late Romanticism ends (63% in the swing era) and reaches 91% by bebop. Rock and pop stay at 21–29% in every decade: a 1985 single is closer to a Mozart sonata than to a 1985 jazz solo.</p>
+</section>
+
+<section id="f2">
+  <h2>2. The dominant loses its grip</h2>
+  <p>Of all moves onto a tonic chord, the share coming from V, from IV and from bVII. The authentic cadence is a plateau, not a constant: about half of tonic arrivals in the Renaissance, 62–67% from 1700 to 1850, 43% after 1900. Rock repeats the decline in thirty years.</p>
+  <div class="grid2">
+    <div class="panelbox"><h3>Classical: what precedes the tonic</h3><div class="key"><span><i style="background:var(--classical)"></i>V → I</span><span><i style="background:var(--iv)"></i>IV → I</span><span><i style="background:var(--bvii)"></i>bVII → I</span></div><div class="chart" id="ch-cad-classical"></div></div>
+    <div class="panelbox"><h3>Rock &amp; pop: what precedes the tonic</h3><div class="key"><span><i style="background:var(--rock)"></i>V → I</span><span><i style="background:var(--iv)"></i>IV → I</span><span><i style="background:var(--bvii)"></i>bVII → I</span></div><div class="chart" id="ch-cad-rock"></div></div>
+    <div class="panelbox"><h3>Does V still go to I?</h3><p class="small muted">Of all moves away from a major dominant, the share that land on the tonic.</p><div class="chart" id="ch-resolution"></div></div>
+    <div class="panelbox"><h3>Where roots go next</h3><p class="small muted">Share of root changes by interval, per era. Descending fifths drive classical and jazz harmony; steps and thirds take over after 1900 and in rock after 1965.</p><div class="key" id="key-motion"></div><div class="chart" id="ch-motion"></div></div>
+  </div>
+</section>
+
+<section id="f3">
+  <h2>3. Chromaticism is flat for two centuries, then climbs</h2>
+  <p>A chord is non-diatonic when its root lies outside the local key or its quality is not the one the key supplies. The share is 20–24% from Corelli to Schubert, 29% after 1850, 40% after 1900. Jazz inherits the late-Romantic level and extends it; rock is the most diatonic music in the corpus.</p>
+  <div class="grid2">
+    <div class="panelbox"><h3>Non-diatonic chords</h3><div class="chart" id="ch-nondiatonic"></div></div>
+    <div class="panelbox"><h3>Types per 40 chords, by era</h3><p class="small muted">Expected number of distinct chord types in a random 40-chord sample. Flat at about 14 from 1600 to 1900, then 20.</p><div class="chart" id="ch-vocab"></div></div>
+  </div>
+</section>
+
+<section id="f4">
+  <h2>4. Richness and predictability come apart</h2>
+  <p>Vocabulary barely changes for three centuries while transition entropy, how unpredictable the next chord is given the current one, rises from 2.7 bits in the Renaissance to 4.5 bits after 1900. Jazz is the extreme case: the most sevenths and the lowest entropy (2.3–2.6 bits), because ii7–V7–I7 repeats through every key.</p>
+  <div class="panelbox"><h3>Transition entropy (bits), by era</h3><div class="chart" id="ch-entropy"></div></div>
+</section>
+
+<section id="f5">
+  <h2>5. Three grammars</h2>
+  <p>The most common chords and progressions in each era show the grammar directly. Roman numerals are relative to the local key; 7 marks any seventh chord, 9 any higher extension.</p>
+  <div class="panelbox"><h3>Top chords and top progressions by era</h3><div class="tbox" style="max-height:none"><table id="tbl-top"><thead><tr><th>Era</th><th>Top chords (share of events)</th><th>Top progressions (share of moves)</th></tr></thead><tbody></tbody></table></div></div>
+  <ol>
+    <li><b>Classical music is the most concentrated</b>: V7→I alone is 10% of all progressions in 1750–99, twice its share in any other era.</li>
+    <li><b>Jazz is sevenths and the circle of fifths</b>: every top chord is a seventh chord and ii7→V7→I7 supplies the two commonest moves.</li>
+    <li><b>Rock is I, IV and V as neighbours</b>: I→IV and IV→I lead every period, V→IV is in the top six after 1965, bVII is a top-six chord from the late 1960s.</li>
+  </ol>
+</section>
+
+<section id="composers">
+  <h2>Composers and artists on a harmonic map</h2>
+  <p>Each point is a composer or artist with five or more located pieces, placed by the first two principal components of their mean 14-feature harmonic profile and coloured by a six-cluster Ward grouping. The first axis runs from triadic, diatonic, plagal harmony to seventh-chord, fifth-driven harmony; the second from cadential to extended, chromatic and step-driven. The clusters cut across genre and century.</p>
+  <div class="panelbox"><div class="key" id="key-clusters"></div><div class="chart" id="ch-map" style="min-height:460px"></div><div class="key"><span>● classical</span><span>■ jazz</span><span>▲ rock &amp; pop</span><span class="muted">Labels for composers with 15+ pieces; hover for the rest.</span></div></div>
+  <div class="clusters" id="cluster-lists"></div>
+</section>
+
+<section id="scenes">
+  <h2>The 25 scenes</h2>
+  <p>Ward clustering of the located pieces in (longitude, latitude, year). The harmonic groups follow the scenes in time order, not in map order: every classical scene from Mantua to Vienna (1592–1827) is one group, every classical scene after 1829 plus bebop New York another, and the rock scenes split into a Southern-US dominant-seventh group and a London–Los Angeles–Detroit–New York group with weaker dominants.</p>
+  <div class="panelbox"><div class="tbox"><table id="tbl-scenes"><thead><tr><th>Scene</th><th class="num">Pieces</th><th>Genre</th><th>Main composers / artists</th><th class="num">Sevenths</th><th class="num">Non-diatonic</th><th class="num">V → I</th><th class="num">Desc. fifths</th><th class="num">Harmonic group</th></tr></thead><tbody></tbody></table></div></div>
+</section>
+
+<section id="mantel">
+  <h2>Does harmony follow time or place?</h2>
+  <p>Mantel tests on pairwise distances between composers and artists: correlation of harmonic distance with distance in years and with distance in kilometres between base cities, and partial versions that remove the other factor. p-values from 5,000 permutations.</p>
+  <div class="panelbox"><div class="tbox" style="max-height:none"><table id="tbl-mantel"><thead><tr><th>Subset</th><th class="num">Units</th><th class="num">r (time)</th><th class="num">p</th><th class="num">r (geography)</th><th class="num">p</th><th class="num">r (geo | time)</th><th class="num">p</th><th class="num">r (time | geo)</th><th class="num">p</th></tr></thead><tbody></tbody></table></div></div>
+  <p>Within classical music, jazz and rock alike, composers close in time are close in harmony. Within classical music and jazz, composers close in space are not, once time is accounted for. Rock and pop show a weak, borderline geographic signal: Memphis, Nashville and Macon against London and Los Angeles. Pooled across genres, geography looks significant and time does not, but that is the Atlantic standing in for genre and the U-shaped history in which 1600 and 1965 sound more alike than either does to 1800. Inside the classical corpus, a piece's harmonically nearest neighbour by another composer is a median 48 years away (random pairs: 84) and in the same city only 10% of the time (random: 14%).</p>
+</section>
+
+<section id="method">
+  <h2>Method and sources</h2>
+  <ul>
+    <li><b>Corpora.</b> DCML Distant Listening Corpus and When in Rome (expert Roman-numeral analyses, 2,058 classical pieces, 1565–1931); Rock Corpus RS200 (Roman numerals, 193 songs); McGill Billboard (chord symbols with tonic, 876 singles, 1958–91); Weimar Jazz Database (lead-sheet changes for 412 solos, 1925–2007). Modern corpora via ChoCo.</li>
+    <li><b>Features.</b> Every chord label becomes: root as scale degree above the local tonic; quality; extension (triad, seventh, ninth and above); non-diatonic flag; applied-chord flag and inversion where annotated; duration in beats. Consecutive identical chords are merged.</li>
+    <li><b>Metrics</b> are computed per piece, then averaged over pieces; intervals are 400 bootstrap resamples of pieces. Vocabulary is rarefied to 40 chords; transition entropy is H(next | current) pooled per era.</li>
+    <li><b>Space-time.</b> Points at (longitude, latitude, year), one century scaled to 1,000 km, Ward clustering into scenes; composers clustered on z-scored mean profiles (Ward); Mantel and partial Mantel tests with 5,000 permutations.</li>
+    <li><b>Caveats.</b> Classical and Rock Corpus labels are expert Roman numerals; Billboard and Weimar are chord symbols, so cross-genre levels are partly notation. Sampling is uneven (1700–49 is largely Bach chorales; 1900–49 is small). Locations are residences, not composition sites.</li>
+    <li><b>Sources.</b> <a href="https://github.com/DCMLab/distant_listening_corpus">DCML</a> · <a href="https://github.com/MarkGotham/When-in-Rome">When in Rome</a> · <a href="https://github.com/smashub/choco">ChoCo</a> · <a href="https://rockcorpus.midside.com/">Rock Corpus</a> · <a href="https://jazzomat.hfm-weimar.de/dbformat/dboverview.html">Weimar Jazz Database</a>. Related work: White 2013/2017; Weiß et al. 2018; Moss et al. 2022; Harasim et al. 2021; González-Espinoza &amp; Plotkin 2023; Park et al. 2020; Broze &amp; Shanahan 2013; Mauch et al. 2015; Gauvin 2015; de Clercq &amp; Temperley 2011; Schich et al. 2014; Georges &amp; Nguyen 2019.</li>
+  </ul>
+</section>
+
+  <footer>Code, data tables and the analysis pipeline are in the repository. Built from open corpora; see each corpus for its licence.</footer>
+</main>
+<script src="vendor/d3.min.js"></script>
+<script src="findings.js?v=2"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@ How chords evolved from Goudimel (1565) to bebop and 1980s pop, and whether harm
 3,539 expert-annotated pieces from five open corpora are reduced to one chord-feature table, placed in a 3D space-time frame
 (longitude × latitude × year), clustered into scenes, and tested with Mantel statistics.
 
-**Live app:** `docs/index.html` (served with GitHub Pages) — an interactive 3D frame of all located pieces plus every finding as a chart.
+**Live app:** [shanem73.github.io/harmony-space-time](https://shanem73.github.io/harmony-space-time/) — a 3D space-time cube of all located pieces on a relief map (orbit, map and profile views, a timeline with playback, a selection card for any piece, composer tracing, light and dark themes), and a findings page with every chart. The design follows [European_spatiotemporal_geography](https://github.com/ShaneM73/European_spatiotemporal_geography).
 
 ## Findings in one paragraph
 
@@ -20,8 +20,8 @@ classical music or jazz once time is controlled.
 
 | Path | Contents |
 | --- | --- |
-| `docs/` | The web app (self-contained; `vendor/` holds three.js r128 and d3 v7). Enable GitHub Pages on `docs/` to publish it. |
-| `src/app_template.html`, `src/build_site.py` | Template and build script for the app (inlines `data/harmony_data.json`). |
+| `docs/` | The web app: `index.html` + `app.js` (the cube), `findings.html` + `findings.js` (the charts), `style.css`, `vendor/` (three.js r128, OrbitControls, d3 v7) and `data/` (the files the pages fetch). Serve over HTTP; GitHub Pages on `docs/` or on the root (which redirects). |
+| `src/build_site.py`, `src/build_basemap.py` | Copy the data into `docs/data` and derive the artifact page; build the relief base map. |
 | `analysis/` | The pipeline: corpus loaders, feature extraction, metrics, location assignment, space-time clustering, Mantel tests. |
 | `data/terrain.png`, `data/map_texture.jpg`, `data/basemap_meta.json` | The 3D base map, built by `src/build_basemap.py` in the style of [European_spatiotemporal_geography](https://github.com/ShaneM73/European_spatiotemporal_geography): elevation + land mask (R/G/B PNG, 1/6°), and a tinted, hillshaded texture with country borders (1/16°). Europe, North Africa and the Near East use that project's 5 km terrain (AWS Terrain Tiles, reprojected from LAEA); the rest uses the ETOPO 20-minute grid; land and countries from world-atlas (Natural Earth 50m). |
 | `data/` | Every output table: per-piece metrics (`pieces.csv`, `pieces_located.csv`), era/period/composer summaries, scenes, composer clusters, Mantel results, and the bundled `harmony_data.json` the app reads. |
