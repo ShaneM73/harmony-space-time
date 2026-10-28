@@ -45,7 +45,7 @@
   .ctl button { font: inherit; font-size: 0.8rem; background: var(--panel-2); color: var(--fg); border: 1px solid var(--line); border-radius: 5px; padding: 3px 9px; cursor: pointer; }
   .ctl button:hover { border-color: var(--accent); }
   .ctl button:focus-visible, .ctl select:focus-visible, .ctl input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-  .legend { position: absolute; right: 12px; bottom: 12px; max-width: min(44%, 340px); max-height: 40%; overflow: auto; background: rgba(18, 23, 34, 0.86); backdrop-filter: blur(6px); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 0.78rem; display: grid; gap: 3px; }
+  .legend { position: absolute; right: 12px; bottom: 12px; max-width: min(36%, 300px); max-height: 32%; overflow: auto; background: rgba(18, 23, 34, 0.86); backdrop-filter: blur(6px); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 0.78rem; display: grid; gap: 3px; }
   .legend span { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .legend i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
   .legend .ramp { height: 10px; border-radius: 3px; }
@@ -97,13 +97,14 @@
 
 <section id="frame">
   <h2>The space-time frame</h2>
-  <p>Each point is one piece at the city its composer or artist was based in that year (horizontal plane: longitude and latitude) and at its year (vertical). Drag to orbit, scroll to zoom, hover a point for the piece. Thin columns mark a city's active years; numbered labels mark the 25 scenes found by clustering the points, with one century counted as 1,000 km.</p>
+  <p>Each point is one piece at the city its composer or artist was based in that year (horizontal plane: longitude and latitude) and at its year (vertical). Drag to orbit, scroll to zoom, hover a point for the piece. The base map is ETOPO relief (vertically exaggerated) with country borders. Thin columns mark a city's active years; the numbered badges mark the 25 scenes found by clustering the points, with one century counted as 1,000 km.</p>
   <div class="frame">
     <canvas id="c3d" aria-label="3D scatter of pieces by longitude, latitude and year"></canvas>
     <div class="hud">
       <div class="ctl">
         <label for="colorBy">Colour by</label>
         <select id="colorBy"><option value="scene">scene</option><option value="genre">genre</option><option value="cluster">harmonic cluster of the composer</option><option value="seventh">seventh-chord share</option><option value="vtoi">V → I share of tonic arrivals</option><option value="nondia">non-diatonic share</option></select>
+        <label><input type="checkbox" id="showMap" checked> relief map</label>
         <label><input type="checkbox" id="showCols" checked> city columns</label>
         <label><input type="checkbox" id="showLabels" checked> scene labels</label>
         <label><input type="checkbox" id="spin" checked> slow spin</label>
@@ -120,7 +121,7 @@
       </div>
     </div>
     <div class="legend" id="legend3d"></div>
-    <div class="axes-note">X: longitude (west → east) · Z: latitude · Y: year, 1550 at the base, 2010 at the top</div>
+    <div class="axes-note">X: longitude · Z: latitude · Y: year, 1550 just above sea level, 2010 at the top</div>
     <div class="tip3d" id="tip3d" hidden></div>
   </div>
   <p class="small muted">Locations are assigned from biography, not recorded in the corpora: documented residence for the 59 classical composers (high confidence), recording base for the 74 jazz performers (medium), home city for pop artists (medium for the Rock Corpus, low for Billboard). 100% of classical, jazz and Rock Corpus pieces are located; 75% of Billboard singles.</p>
@@ -209,6 +210,7 @@
 
 __LIBS__
 <script id="harmony-data" type="application/json">__DATA__</script>
+<script id="basemap-data" type="application/json">__BASEMAP__</script>
 <script>
 (function () {
   const DATA = JSON.parse(document.getElementById('harmony-data').textContent);
@@ -231,7 +233,8 @@ __LIBS__
   const SX = 24, SZ = 7, SY = 11; // world extents
   const px = (lon) => (lon - LON[0]) / (LON[1] - LON[0]) * SX - SX / 2;
   const pz = (lat) => -((lat - LAT[0]) / (LAT[1] - LAT[0]) * SZ - SZ / 2);
-  const py = (yr) => (yr - YEAR[0]) / (YEAR[1] - YEAR[0]) * SY;
+  const BASE = 0.5; // the year axis starts this far above sea level, clear of the relief
+  const py = (yr) => BASE + (yr - YEAR[0]) / (YEAR[1] - YEAR[0]) * SY;
   let three = null;
   try {
     if (!window.THREE) throw new Error('three missing');
@@ -239,20 +242,41 @@ __LIBS__
     renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
     const scene = new THREE.Scene(); scene.background = new THREE.Color('#070910');
     const camera = new THREE.PerspectiveCamera(42, 2, 0.1, 500);
-    const target = new THREE.Vector3(0, SY * 0.45, 0);
-    const orbit = { theta: -0.55, phi: 1.2, r: 27 };
+    const target = new THREE.Vector3(1.5, SY * 0.4 + BASE, 0);
+    const orbit = { theta: -0.42, phi: 1.18, r: 29 };
     const applyCam = () => { camera.position.set(target.x + orbit.r * Math.sin(orbit.phi) * Math.sin(orbit.theta), target.y + orbit.r * Math.cos(orbit.phi), target.z + orbit.r * Math.sin(orbit.phi) * Math.cos(orbit.theta)); camera.lookAt(target); };
     applyCam();
-    // base grid + axes
+    // relief base map: ETOPO 1/3-degree elevations displace a plane; the hypsometric image is its texture
+    const BM = JSON.parse(document.getElementById('basemap-data').textContent);
+    const E = BM.elev; const bin = atob(E.data); const elev = new Int16Array(bin.length / 2);
+    for (let i = 0; i < elev.length; i++) elev[i] = (bin.charCodeAt(2 * i) | (bin.charCodeAt(2 * i + 1) << 8)) << 16 >> 16;
+    const yOf = (m) => m > 0 ? m / 7000 * 0.62 : m / 8000 * 0.22; // metres -> world units (land exaggerated more than sea floor)
+    const sample = (lon, lat) => { // bilinear elevation at a point (rows run south -> north in the data)
+      const fx = (lon - E.lon0) / (E.lon1 - E.lon0) * (E.cols - 1), fy = (lat - E.lat0) / (E.lat1 - E.lat0) * (E.rows - 1);
+      const x0 = Math.max(0, Math.min(E.cols - 2, Math.floor(fx))), y0 = Math.max(0, Math.min(E.rows - 2, Math.floor(fy))); const tx = fx - x0, ty = fy - y0;
+      const v = (r, c) => elev[r * E.cols + c];
+      return (v(y0, x0) * (1 - tx) + v(y0, x0 + 1) * tx) * (1 - ty) + (v(y0 + 1, x0) * (1 - tx) + v(y0 + 1, x0 + 1) * tx) * ty;
+    };
+    const tw = px(E.lon1) - px(E.lon0), th = pz(E.lat0) - pz(E.lat1);
+    const tg = new THREE.PlaneGeometry(tw, th, E.cols - 1, E.rows - 1); tg.rotateX(-Math.PI / 2);
+    tg.translate((px(E.lon0) + px(E.lon1)) / 2, 0, (pz(E.lat0) + pz(E.lat1)) / 2);
+    { const pa = tg.attributes.position; // plane rows go north -> south after the rotation; data rows go south -> north
+      for (let r = 0; r < E.rows; r++) for (let c = 0; c < E.cols; c++) { const vi = r * E.cols + c; pa.setY(vi, yOf(elev[(E.rows - 1 - r) * E.cols + c])); }
+      pa.needsUpdate = true; tg.computeVertexNormals(); }
+    const texImg = new Image(); const tex = new THREE.Texture(texImg); texImg.onload = () => { tex.needsUpdate = true; }; texImg.src = BM.texture;
+    tex.minFilter = THREE.LinearFilter; tex.anisotropy = 4;
+    const terrain = new THREE.Mesh(tg, new THREE.MeshLambertMaterial({ map: tex, color: '#cfd4dc' })); scene.add(terrain);
+    scene.add(new THREE.AmbientLight('#ffffff', 0.62));
+    const sun = new THREE.DirectionalLight('#fff2dc', 0.9); sun.position.set(-8, 14, 6); scene.add(sun);
+    // country borders draped on the relief
+    const drape = (lines, color, opacity) => { const pts = []; for (const line of lines) for (let i = 1; i < line.length; i++) { const [a, b] = [line[i - 1], line[i]]; pts.push(px(a[0]), yOf(Math.max(0, sample(a[0], a[1]))) + 0.012, pz(a[1]), px(b[0]), yOf(Math.max(0, sample(b[0], b[1]))) + 0.012, pz(b[1])); } const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3)); return new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color, transparent: true, opacity })); };
+    const bordersG = drape(BM.borders, '#ffffff', 0.28); scene.add(bordersG);
+    // year axis
     const grid = new THREE.Group(); scene.add(grid);
-    const lm = new THREE.LineBasicMaterial({ color: '#1e2639' });
-    const gridPts = [];
-    for (let lon = -120; lon <= 40; lon += 20) gridPts.push(px(lon), 0, pz(LAT[0]), px(lon), 0, pz(LAT[1]));
-    for (let lat = 20; lat <= 60; lat += 10) gridPts.push(px(LON[0]), 0, pz(lat), px(LON[1]), 0, pz(lat));
-    const gg = new THREE.BufferGeometry(); gg.setAttribute('position', new THREE.Float32BufferAttribute(gridPts, 3)); grid.add(new THREE.LineSegments(gg, lm));
-    const axm = new THREE.LineBasicMaterial({ color: '#3a4663' });
-    const axPts = [px(LON[0]), 0, pz(LAT[0]), px(LON[0]), SY, pz(LAT[0])];
-    for (let yr = 1600; yr <= 2000; yr += 100) axPts.push(px(LON[0]) - 0.3, py(yr), pz(LAT[0]), px(LON[0]), py(yr), pz(LAT[0]));
+    const axm = new THREE.LineBasicMaterial({ color: '#4a5878' });
+    const axX = px(LON[0]) - 0.6, axZ = pz(LAT[0]) + 0.6;
+    const axPts = [axX, BASE, axZ, axX, py(YEAR[1]), axZ];
+    for (let yr = 1600; yr <= 2000; yr += 100) axPts.push(axX - 0.3, py(yr), axZ, axX, py(yr), axZ);
     const ag = new THREE.BufferGeometry(); ag.setAttribute('position', new THREE.Float32BufferAttribute(axPts, 3)); grid.add(new THREE.LineSegments(ag, axm));
     const makeLabel = (text, size, color, bg) => {
       const c = document.createElement('canvas'); const ctx = c.getContext('2d'); const fs = 44;
@@ -264,17 +288,16 @@ __LIBS__
       const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
       sp.scale.set(size * w / c.height, size, 1); return sp;
     };
-    for (let yr = 1600; yr <= 2000; yr += 100) { const l = makeLabel(String(yr), 0.42, '#9aa3b5'); l.position.set(px(LON[0]) - 1.1, py(yr), pz(LAT[0])); grid.add(l); }
-    for (const [name, lon, lat] of [['Europe', 10, 52], ['North America', -95, 40]]) { const l = makeLabel(name, 0.5, '#5c6579'); l.position.set(px(lon), -0.35, pz(lat)); grid.add(l); }
+    for (let yr = 1600; yr <= 2000; yr += 100) { const l = makeLabel(String(yr), 0.42, '#9aa3b5'); l.position.set(axX - 1.1, py(yr), axZ); grid.add(l); }
     // city columns (per city: active years)
     const cityG = new THREE.Group(); scene.add(cityG);
     const byCity = d3.group(pieces, (p) => p.city);
     const colPts = [];
-    for (const [city, ps] of byCity) { const lon = ps[0].lon, lat = ps[0].lat; if (lon < LON[0] || lon > LON[1] || lat < LAT[0] || lat > LAT[1]) continue; const ys = d3.extent(ps, (p) => p.year); colPts.push(px(lon), 0, pz(lat), px(lon), py(ys[1]), pz(lat)); }
+    for (const [city, ps] of byCity) { const lon = ps[0].lon, lat = ps[0].lat; if (lon < LON[0] || lon > LON[1] || lat < LAT[0] || lat > LAT[1]) continue; const ys = d3.extent(ps, (p) => p.year); colPts.push(px(lon), yOf(Math.max(0, sample(lon, lat))), pz(lat), px(lon), py(ys[1]), pz(lat)); }
     const cg = new THREE.BufferGeometry(); cg.setAttribute('position', new THREE.Float32BufferAttribute(colPts, 3));
-    cityG.add(new THREE.LineSegments(cg, new THREE.LineBasicMaterial({ color: '#2b3652', transparent: true, opacity: 0.9 })));
+    cityG.add(new THREE.LineSegments(cg, new THREE.LineBasicMaterial({ color: '#8fa0c4', transparent: true, opacity: 0.55 })));
     const bigCities = [...byCity].filter(([c, ps]) => ps.length >= 40).map(([c, ps]) => [c, ps[0].lon, ps[0].lat]);
-    for (const [c, lon, lat] of bigCities) { if (lon < LON[0] || lon > LON[1]) continue; const l = makeLabel(c, 0.34, '#9aa3b5'); l.position.set(px(lon), -0.2, pz(lat) + 0.25); cityG.add(l); }
+    for (const [c, lon, lat] of bigCities) { if (lon < LON[0] || lon > LON[1]) continue; const l = makeLabel(c, 0.34, '#ffffff', 'rgba(11,14,20,0.55)'); l.position.set(px(lon), yOf(Math.max(0, sample(lon, lat))) + 0.22, pz(lat) + 0.2); cityG.add(l); }
     // scene labels
     const labG = new THREE.Group(); scene.add(labG);
     scenes.forEach((s, i) => { const l = makeLabel(`${s.scene_id}`, 0.42, '#0b0e14', SCENE_COL[i]); l.position.set(px(s.lon) + (i % 3 - 1) * 0.35, py(s.year_mid) + 0.45, pz(s.lat)); labG.add(l); });
@@ -286,7 +309,9 @@ __LIBS__
     inFrame.forEach((p, i) => { const h = hash(p.piece_id); const jx = ((h % 1000) / 1000 - 0.5) * 0.5, jz = (((h >> 10) % 1000) / 1000 - 0.5) * 0.35, jy = (((h >> 20) % 1000) / 1000 - 0.5) * 0.08; basePos[i * 3] = px(p.lon) + jx; basePos[i * 3 + 1] = py(p.year) + jy; basePos[i * 3 + 2] = pz(p.lat) + jz; });
     pos.set(basePos);
     const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-    const mat = new THREE.PointsMaterial({ size: 0.22, vertexColors: true, sizeAttenuation: true, transparent: true, opacity: 0.88 });
+    const dot = document.createElement('canvas'); dot.width = dot.height = 64; { const cx = dot.getContext('2d'); cx.beginPath(); cx.arc(32, 32, 28, 0, Math.PI * 2); cx.fillStyle = '#fff'; cx.fill(); }
+    const dotTex = new THREE.CanvasTexture(dot);
+    const mat = new THREE.PointsMaterial({ size: 0.24, map: dotTex, alphaTest: 0.5, vertexColors: true, sizeAttenuation: true, transparent: true, opacity: 0.92 });
     const points = new THREE.Points(geo, mat); scene.add(points);
     const hl = new THREE.Mesh(new THREE.SphereGeometry(0.2, 12, 12), new THREE.MeshBasicMaterial({ color: '#ffffff' })); hl.visible = false; scene.add(hl);
     // colouring
@@ -315,6 +340,7 @@ __LIBS__
     // controls
     document.getElementById('colorBy').addEventListener('change', (e) => { state.mode = e.target.value; recolor(); });
     document.getElementById('showCols').addEventListener('change', (e) => { cityG.visible = e.target.checked; });
+    document.getElementById('showMap').addEventListener('change', (e) => { terrain.visible = e.target.checked; bordersG.visible = e.target.checked; });
     document.getElementById('showLabels').addEventListener('change', (e) => { labG.visible = e.target.checked; });
     const yMin = document.getElementById('yearMin'), yMax = document.getElementById('yearMax'), yLab = document.getElementById('yearLabel');
     const years = () => { let a = +yMin.value, b = +yMax.value; if (a > b) [a, b] = [b, a]; state.y0 = a; state.y1 = b; yLab.textContent = `${a}–${b}`; refilter(); };
@@ -322,7 +348,7 @@ __LIBS__
     document.querySelectorAll('.gf').forEach((cb) => cb.addEventListener('change', () => { state.genres = new Set([...document.querySelectorAll('.gf')].filter((c) => c.checked).map((c) => c.value)); refilter(); }));
     let spinning = document.getElementById('spin').checked;
     document.getElementById('spin').addEventListener('change', (e) => { spinning = e.target.checked; });
-    document.getElementById('resetView').addEventListener('click', () => { orbit.theta = -0.55; orbit.phi = 1.2; orbit.r = 27; applyCam(); });
+    document.getElementById('resetView').addEventListener('click', () => { orbit.theta = -0.42; orbit.phi = 1.18; orbit.r = 29; applyCam(); });
     // orbit interaction
     let drag = null;
     canvas.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, th: orbit.theta, ph: orbit.phi }; canvas.setPointerCapture(e.pointerId); spinning = false; document.getElementById('spin').checked = false; });

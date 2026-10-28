@@ -23,6 +23,7 @@ classical music or jazz once time is controlled.
 | `docs/` | The web app (self-contained; `vendor/` holds three.js r128 and d3 v7). Enable GitHub Pages on `docs/` to publish it. |
 | `src/app_template.html`, `src/build_site.py` | Template and build script for the app (inlines `data/harmony_data.json`). |
 | `analysis/` | The pipeline: corpus loaders, feature extraction, metrics, location assignment, space-time clustering, Mantel tests. |
+| `data/basemap.json` | ETOPO 1/3° elevations, a hypsometric relief image and country borders cropped to Europe and North America (from the matplotlib/basemap examples and world-atlas), for the 3D base map. |
 | `data/` | Every output table: per-piece metrics (`pieces.csv`, `pieces_located.csv`), era/period/composer summaries, scenes, composer clusters, Mantel results, and the bundled `harmony_data.json` the app reads. |
 
 ## Reproduce
