@@ -10,7 +10,7 @@
     dark: { bg: '#14171a', grid: '#2b3036', axis: '#5c6570', cl: ['#5c6579', '#f2b134', '#c38fe6', '#79c99e', '#e8737a', '#f08a4b', '#7fb3e6'], genre: { classical: '#7aa2ff', jazz: '#f2b134', rock_pop: '#ff8a5c' }, lo: '#3a4663', hi: '#ff7a45' },
   };
   const S = 5; // half-size of the box in world units
-  const state = { theme: 'dark', axes: 'fa', colorBy: 'cluster', on: new Set([1, 2, 3, 4, 5, 6]), allNames: false, drops: true, centres: true, sel: null, hover: null };
+  const state = { theme: 'dark', axes: 'fa', colorBy: 'cluster', on: new Set([1, 2, 3, 4, 5, 6]), allNames: false, size: 1, bySize: true, drops: true, centres: true, sel: null, hover: null };
   try { const t = localStorage.getItem('hst-theme'); if (t === 'light' || t === 'dark') state.theme = t; } catch (e) { /* ignore */ }
 
   let D, comps, renderer, scene, camera, controls, meshes = [], drops, frame3, centreEls = [], nameEls = [], axisEls = [], scale = {};
@@ -43,7 +43,7 @@
     const geo = { classical: new THREE.SphereGeometry(1, 20, 14), jazz: new THREE.BoxGeometry(1.6, 1.6, 1.6), rock_pop: new THREE.ConeGeometry(1.05, 1.9, 4) };
     comps.forEach((c, i) => {
       const m = new THREE.Mesh(geo[c.genre], new THREE.MeshLambertMaterial({ transparent: true }));
-      const r = 0.08 + 0.04 * Math.log2(c.n); m.scale.setScalar(r); m.userData = { i, r }; scene.add(m); meshes.push(m);
+      m.userData = { i }; scene.add(m); meshes.push(m);
     });
     drops = new THREE.LineSegments(new THREE.BufferGeometry().setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(comps.length * 6), 3)).setAttribute('color', new THREE.Float32BufferAttribute(new Float32Array(comps.length * 6), 3)), new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.45 }));
     scene.add(drops);
@@ -75,6 +75,7 @@
     if (state.colorBy === 'conf') return ramp(c.conf);
     return t.cl[c.cluster];
   }
+  function resize() { comps.forEach((c, i) => meshes[i].scale.setScalar(state.size * (state.bySize ? 0.04 + 0.014 * Math.log2(c.n) : 0.09))); }
   function restyle() {
     const t = THEMES[state.theme], col = drops.geometry.attributes.color.array, cc = new THREE.Color();
     comps.forEach((c, i) => {
@@ -117,7 +118,7 @@
     state.theme = th; const t = THEMES[th]; document.documentElement.dataset.theme = th; document.querySelectorAll('#theme button').forEach((b) => b.classList.toggle('on', b.dataset.theme === th));
     scene.background = new THREE.Color(t.bg); frame3.grid.material.color.set(t.grid); frame3.box.material.color.set(t.grid); frame3.axes.material.color.set(t.axis);
     try { localStorage.setItem('hst-theme', th); } catch (e) { /* ignore */ }
-    restyle(); if (D) setAxes(state.axes, true); if (state.sel != null) select(state.sel);
+    resize(); restyle(); if (D) setAxes(state.axes, true); if (state.sel != null) select(state.sel);
   }
   function panel() {
     const s = D.stats; $('method').textContent = `Groups: Ward clustering on all 14 standardised harmonic features. Axes: varimax factor analysis (or PCA) of the same features, for display only. Silhouette ${s.silhouette['6'].toFixed(2)}; bootstrap agreement ${s.bootstrap_ari_mean.toFixed(2)} — overlapping regions of a continuum, not islands.`;
@@ -126,11 +127,13 @@
       let timer = null; b.addEventListener('click', () => { clearTimeout(timer); timer = setTimeout(() => { state.on.has(k) ? state.on.delete(k) : state.on.add(k); if (!state.on.size) state.on = new Set([1, 2, 3, 4, 5, 6]); restyle(); }, 220); });
       b.addEventListener('dblclick', () => { clearTimeout(timer); state.on = state.on.size === 1 && state.on.has(k) ? new Set([1, 2, 3, 4, 5, 6]) : new Set([k]); restyle(); });
       cl.append(b); }
-    $('foot').textContent = 'The number after each cluster is its size and the mean share of bootstrap re-runs in which its members stay together. Faded markers are border members (below 50%). Marker size grows with the logarithm of the number of analysed pieces.';
+    $('foot').textContent = 'The number after each cluster is its size and the mean share of bootstrap re-runs in which its members stay together. Faded markers are border members (below 50%). Colour = cluster; shape = genre (sphere classical, cube jazz, pyramid rock & pop). With “Size by pieces” on, marker size grows with the logarithm of the number of analysed pieces.';
     document.querySelectorAll('#axes button').forEach((b) => b.addEventListener('click', () => setAxes(b.dataset.axes)));
     document.querySelectorAll('#theme button').forEach((b) => b.addEventListener('click', () => applyTheme(b.dataset.theme)));
     $('colorBy').addEventListener('change', (e) => { state.colorBy = e.target.value; restyle(); });
     $('allNames').addEventListener('change', (e) => { state.allNames = e.target.checked; });
+    $('msize').addEventListener('input', (e) => { state.size = e.target.value / 100; $('msizeVal').textContent = `×${state.size.toFixed(1)}`; resize(); });
+    $('bySize').addEventListener('change', (e) => { state.bySize = e.target.checked; resize(); });
     $('drops').addEventListener('change', (e) => { state.drops = e.target.checked; restyle(); });
     $('centres').addEventListener('change', (e) => { state.centres = e.target.checked; });
     $('selClose').addEventListener('click', clearSel);

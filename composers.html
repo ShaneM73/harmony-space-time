@@ -67,9 +67,11 @@
         <span>Colour by</span>
         <select id="colorBy" class="pick" aria-label="Colour by"><option value="cluster">Cluster</option><option value="genre">Genre</option><option value="year">Year</option><option value="conf">Membership confidence</option></select>
       </div>
-      <div class="sel-label">Clusters · click to show or hide, double-click to isolate</div>
+      <div class="sel-label">Clusters (colour) · click to show or hide, double-click to isolate</div>
       <div id="clist" class="clist"></div>
-      <div class="shapes"><span>● classical</span><span>■ jazz</span><span>▲ rock &amp; pop</span><span>faded = border member</span></div>
+      <div class="shapes"><span>Colour = cluster · shape = genre:</span><span>● classical</span><span>■ jazz</span><span>▲ rock &amp; pop</span><span>faded = border member</span></div>
+      <label class="row"><span>Marker size <em id="msizeVal">×1.0</em></span><input id="msize" type="range" min="30" max="200" step="10" value="100"></label>
+      <label class="row"><span>Size by pieces</span><input id="bySize" type="checkbox" class="switch" checked></label>
       <label class="row"><span>All names</span><input id="allNames" type="checkbox" class="switch"></label>
       <label class="row"><span>Drop lines</span><input id="drops" type="checkbox" class="switch" checked></label>
       <label class="row"><span>Cluster centres</span><input id="centres" type="checkbox" class="switch" checked></label>
@@ -89,6 +91,6 @@
   <script src="vendor/three.min.js"></script>
   <script src="vendor/OrbitControls.js"></script>
   <script src="vendor/d3.min.js"></script>
-  <script src="composers.js?v=1"></script>
+  <script src="composers.js?v=2"></script>
 </body>
 </html>
