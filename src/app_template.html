@@ -97,7 +97,7 @@
 
 <section id="frame">
   <h2>The space-time frame</h2>
-  <p>Each point is one piece at the city its composer or artist was based in that year (horizontal plane: longitude and latitude) and at its year (vertical). Drag to orbit, scroll to zoom, hover a point for the piece. The base map is ETOPO relief (vertically exaggerated) with country borders. Thin columns mark a city's active years; the numbered badges mark the 25 scenes found by clustering the points, with one century counted as 1,000 km.</p>
+  <p>Each point is one piece at the city its composer or artist was based in that year (horizontal plane: longitude and latitude) and at its year (vertical). Drag to orbit, scroll to zoom, hover a point for the piece. The base map is shaded relief with a flat sea and today's country borders (5 km elevation data for Europe, North Africa and the Near East, from the European Spatiotemporal Geography project; a 37 km global grid elsewhere), with adjustable vertical exaggeration. Thin columns mark a city's active years; the numbered badges mark the 25 scenes found by clustering the points, with one century counted as 1,000 km.</p>
   <div class="frame">
     <canvas id="c3d" aria-label="3D scatter of pieces by longitude, latitude and year"></canvas>
     <div class="hud">
@@ -105,6 +105,7 @@
         <label for="colorBy">Colour by</label>
         <select id="colorBy"><option value="scene">scene</option><option value="genre">genre</option><option value="cluster">harmonic cluster of the composer</option><option value="seventh">seventh-chord share</option><option value="vtoi">V → I share of tonic arrivals</option><option value="nondia">non-diatonic share</option></select>
         <label><input type="checkbox" id="showMap" checked> relief map</label>
+        <label for="relief">relief</label><input type="range" id="relief" min="4" max="20" value="12" aria-label="vertical exaggeration"><span class="mono small" id="reliefVal">×73</span>
         <label><input type="checkbox" id="showCols" checked> city columns</label>
         <label><input type="checkbox" id="showLabels" checked> scene labels</label>
         <label><input type="checkbox" id="spin" checked> slow spin</label>
@@ -229,11 +230,11 @@ __LIBS__
   /* ------------------------------------------------------------------ 3D frame */
   const canvas = document.getElementById('c3d');
   const frame = canvas.parentElement;
-  const LON = [-130, 45], LAT = [15, 65], YEAR = [1550, 2010];
-  const SX = 24, SZ = 7, SY = 11; // world extents
+  const LON = [-130, 45], LAT = [12, 70], YEAR = [1550, 2010];
+  const SX = 24, SZ = 24 * (LAT[1] - LAT[0]) / ((LON[1] - LON[0]) * Math.cos(41 * Math.PI / 180)), SY = 11; // world extents; x is scaled by cos 41° so Europe is not stretched
   const px = (lon) => (lon - LON[0]) / (LON[1] - LON[0]) * SX - SX / 2;
   const pz = (lat) => -((lat - LAT[0]) / (LAT[1] - LAT[0]) * SZ - SZ / 2);
-  const BASE = 0.5; // the year axis starts this far above sea level, clear of the relief
+  const BASE = 0.8; // the year axis starts this far above sea level, clear of the relief
   const py = (yr) => BASE + (yr - YEAR[0]) / (YEAR[1] - YEAR[0]) * SY;
   let three = null;
   try {
@@ -242,35 +243,53 @@ __LIBS__
     renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
     const scene = new THREE.Scene(); scene.background = new THREE.Color('#070910');
     const camera = new THREE.PerspectiveCamera(42, 2, 0.1, 500);
-    const target = new THREE.Vector3(1.5, SY * 0.4 + BASE, 0);
-    const orbit = { theta: -0.42, phi: 1.18, r: 29 };
+    const target = new THREE.Vector3(1.0, SY * 0.4 + BASE, 0);
+    const orbit = { theta: -0.38, phi: 1.18, r: 28 };
     const applyCam = () => { camera.position.set(target.x + orbit.r * Math.sin(orbit.phi) * Math.sin(orbit.theta), target.y + orbit.r * Math.cos(orbit.phi), target.z + orbit.r * Math.sin(orbit.phi) * Math.cos(orbit.theta)); camera.lookAt(target); };
     applyCam();
-    // relief base map: ETOPO 1/3-degree elevations displace a plane; the hypsometric image is its texture
+    // relief base map in the style of European_spatiotemporal_geography: elevation + land mask decoded from a
+    // PNG (R/G = metres + offset, B = land), a flat sea, a pre-rendered tinted hillshade texture, a plinth below
     const BM = JSON.parse(document.getElementById('basemap-data').textContent);
-    const E = BM.elev; const bin = atob(E.data); const elev = new Int16Array(bin.length / 2);
-    for (let i = 0; i < elev.length; i++) elev[i] = (bin.charCodeAt(2 * i) | (bin.charCodeAt(2 * i + 1) << 8)) << 16 >> 16;
-    const yOf = (m) => m > 0 ? m / 7000 * 0.62 : m / 8000 * 0.22; // metres -> world units (land exaggerated more than sea floor)
-    const sample = (lon, lat) => { // bilinear elevation at a point (rows run south -> north in the data)
-      const fx = (lon - E.lon0) / (E.lon1 - E.lon0) * (E.cols - 1), fy = (lat - E.lat0) / (E.lat1 - E.lat0) * (E.rows - 1);
-      const x0 = Math.max(0, Math.min(E.cols - 2, Math.floor(fx))), y0 = Math.max(0, Math.min(E.rows - 2, Math.floor(fy))); const tx = fx - x0, ty = fy - y0;
-      const v = (r, c) => elev[r * E.cols + c];
-      return (v(y0, x0) * (1 - tx) + v(y0, x0 + 1) * tx) * (1 - ty) + (v(y0 + 1, x0) * (1 - tx) + v(y0 + 1, x0 + 1) * tx) * ty;
+    const [gridW, gridH] = BM.elevSize; let elev = null, land = null;
+    const sample = (lon, lat) => { // bilinear elevation (metres) at a point; 0 on sea or before the data has loaded
+      if (!elev) return 0;
+      const gx = Math.max(0, Math.min(gridW - 1.001, (lon - LON[0]) / (LON[1] - LON[0]) * (gridW - 1)));
+      const gy = Math.max(0, Math.min(gridH - 1.001, (LAT[1] - lat) / (LAT[1] - LAT[0]) * (gridH - 1)));
+      const x0 = Math.floor(gx), y0 = Math.floor(gy), tx = gx - x0, ty = gy - y0, i = y0 * gridW + x0;
+      if (!land[Math.round(gy) * gridW + Math.round(gx)]) return 0;
+      return elev[i] * (1 - tx) * (1 - ty) + elev[i + 1] * tx * (1 - ty) + elev[i + gridW] * (1 - tx) * ty + elev[i + gridW + 1] * tx * ty;
     };
-    const tw = px(E.lon1) - px(E.lon0), th = pz(E.lat0) - pz(E.lat1);
-    const tg = new THREE.PlaneGeometry(tw, th, E.cols - 1, E.rows - 1); tg.rotateX(-Math.PI / 2);
-    tg.translate((px(E.lon0) + px(E.lon1)) / 2, 0, (pz(E.lat0) + pz(E.lat1)) / 2);
-    { const pa = tg.attributes.position; // plane rows go north -> south after the rotation; data rows go south -> north
-      for (let r = 0; r < E.rows; r++) for (let c = 0; c < E.cols; c++) { const vi = r * E.cols + c; pa.setY(vi, yOf(elev[(E.rows - 1 - r) * E.cols + c])); }
-      pa.needsUpdate = true; tg.computeVertexNormals(); }
+    const KM_PER_UNIT = (LON[1] - LON[0]) * 111.32 * Math.cos(41 * Math.PI / 180) / SX;
+    const state3 = { reliefK: 0.12 }; // world units per 1,000 m
+    const SEA_Y = -0.02;
+    const yOf = (m) => m > 0 ? m / 1000 * state3.reliefK : SEA_Y;
+    const tw = px(LON[1]) - px(LON[0]), th = pz(LAT[0]) - pz(LAT[1]);
+    const terrainG = new THREE.Group(); scene.add(terrainG);
+    // plinth
+    const slab = new THREE.Mesh(new THREE.BoxGeometry(tw, 0.6, th), [new THREE.MeshLambertMaterial({ color: '#1d2125' }), new THREE.MeshLambertMaterial({ color: '#1d2125' }), new THREE.MeshLambertMaterial({ color: '#24282c' }), new THREE.MeshLambertMaterial({ color: '#1d2125' }), new THREE.MeshLambertMaterial({ color: '#1d2125' }), new THREE.MeshLambertMaterial({ color: '#1d2125' })]);
+    slab.position.set((px(LON[0]) + px(LON[1])) / 2, SEA_Y - 0.3 - 0.002, (pz(LAT[0]) + pz(LAT[1])) / 2); terrainG.add(slab);
+    // terrain mesh: one vertex per elevation cell
+    const tg = new THREE.BufferGeometry();
+    const nv = gridW * gridH, tpos = new Float32Array(nv * 3), tuv = new Float32Array(nv * 2);
+    for (let j = 0; j < gridH; j++) for (let i = 0; i < gridW; i++) { const v = j * gridW + i; tpos[v * 3] = px(LON[0] + i / (gridW - 1) * (LON[1] - LON[0])); tpos[v * 3 + 1] = SEA_Y; tpos[v * 3 + 2] = pz(LAT[1] - j / (gridH - 1) * (LAT[1] - LAT[0])); tuv[v * 2] = i / (gridW - 1); tuv[v * 2 + 1] = 1 - j / (gridH - 1); }
+    const tidx = new Uint32Array((gridW - 1) * (gridH - 1) * 6); let k6 = 0;
+    for (let j = 0; j < gridH - 1; j++) for (let i = 0; i < gridW - 1; i++) { const a = j * gridW + i, b = a + 1, c = a + gridW, d = c + 1; tidx.set([a, c, b, b, c, d], k6); k6 += 6; }
+    tg.setAttribute('position', new THREE.BufferAttribute(tpos, 3)); tg.setAttribute('uv', new THREE.BufferAttribute(tuv, 2)); tg.setIndex(new THREE.BufferAttribute(tidx, 1));
     const texImg = new Image(); const tex = new THREE.Texture(texImg); texImg.onload = () => { tex.needsUpdate = true; }; texImg.src = BM.texture;
-    tex.minFilter = THREE.LinearFilter; tex.anisotropy = 4;
-    const terrain = new THREE.Mesh(tg, new THREE.MeshLambertMaterial({ map: tex, color: '#cfd4dc' })); scene.add(terrain);
-    scene.add(new THREE.AmbientLight('#ffffff', 0.62));
-    const sun = new THREE.DirectionalLight('#fff2dc', 0.9); sun.position.set(-8, 14, 6); scene.add(sun);
-    // country borders draped on the relief
-    const drape = (lines, color, opacity) => { const pts = []; for (const line of lines) for (let i = 1; i < line.length; i++) { const [a, b] = [line[i - 1], line[i]]; pts.push(px(a[0]), yOf(Math.max(0, sample(a[0], a[1]))) + 0.012, pz(a[1]), px(b[0]), yOf(Math.max(0, sample(b[0], b[1]))) + 0.012, pz(b[1])); } const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3)); return new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color, transparent: true, opacity })); };
-    const bordersG = drape(BM.borders, '#ffffff', 0.28); scene.add(bordersG);
+    tex.minFilter = THREE.LinearMipMapLinearFilter; tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+    const terrain = new THREE.Mesh(tg, new THREE.MeshLambertMaterial({ map: tex })); terrainG.add(terrain);
+    scene.add(new THREE.HemisphereLight('#ffffff', '#30363d', 1.0));
+    const sun = new THREE.DirectionalLight('#ffffff', 0.55); sun.position.set(-8, 14, 6); scene.add(sun);
+    const updateRelief = () => { if (!elev) return; for (let v = 0; v < nv; v++) { const j = Math.floor(v / gridW), i = v % gridW; tpos[v * 3 + 1] = land[v] ? yOf(elev[v]) : SEA_Y; } tg.attributes.position.needsUpdate = true; tg.computeVertexNormals(); tg.computeBoundingSphere(); };
+    const afterTerrain = []; // things that need elevations (city columns, labels)
+    const terrImg = new Image();
+    terrImg.onload = () => {
+      const c = document.createElement('canvas'); c.width = gridW; c.height = gridH; const cx = c.getContext('2d', { willReadFrequently: true }); cx.drawImage(terrImg, 0, 0);
+      const d = cx.getImageData(0, 0, gridW, gridH).data; elev = new Float32Array(nv); land = new Uint8Array(nv);
+      for (let i = 0; i < nv; i++) { land[i] = d[i * 4 + 2] > 127 ? 1 : 0; elev[i] = land[i] ? Math.max(0, d[i * 4] * 256 + d[i * 4 + 1] - BM.elevationOffset) : 0; }
+      updateRelief(); for (const f of afterTerrain) f();
+    };
+    terrImg.src = BM.terrain;
     // year axis
     const grid = new THREE.Group(); scene.add(grid);
     const axm = new THREE.LineBasicMaterial({ color: '#4a5878' });
@@ -288,16 +307,19 @@ __LIBS__
       const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
       sp.scale.set(size * w / c.height, size, 1); return sp;
     };
-    for (let yr = 1600; yr <= 2000; yr += 100) { const l = makeLabel(String(yr), 0.42, '#9aa3b5'); l.position.set(axX - 1.1, py(yr), axZ); grid.add(l); }
-    // city columns (per city: active years)
+    for (let yr = 1600; yr <= 2000; yr += 100) { const l = makeLabel(String(yr), 0.4, '#9aa3b5'); l.position.set(axX - 0.85, py(yr), axZ); grid.add(l); }
+    // city columns (per city: active years) and labels, placed once elevations are known
     const cityG = new THREE.Group(); scene.add(cityG);
     const byCity = d3.group(pieces, (p) => p.city);
-    const colPts = [];
-    for (const [city, ps] of byCity) { const lon = ps[0].lon, lat = ps[0].lat; if (lon < LON[0] || lon > LON[1] || lat < LAT[0] || lat > LAT[1]) continue; const ys = d3.extent(ps, (p) => p.year); colPts.push(px(lon), yOf(Math.max(0, sample(lon, lat))), pz(lat), px(lon), py(ys[1]), pz(lat)); }
-    const cg = new THREE.BufferGeometry(); cg.setAttribute('position', new THREE.Float32BufferAttribute(colPts, 3));
-    cityG.add(new THREE.LineSegments(cg, new THREE.LineBasicMaterial({ color: '#8fa0c4', transparent: true, opacity: 0.55 })));
-    const bigCities = [...byCity].filter(([c, ps]) => ps.length >= 40).map(([c, ps]) => [c, ps[0].lon, ps[0].lat]);
-    for (const [c, lon, lat] of bigCities) { if (lon < LON[0] || lon > LON[1]) continue; const l = makeLabel(c, 0.34, '#ffffff', 'rgba(11,14,20,0.55)'); l.position.set(px(lon), yOf(Math.max(0, sample(lon, lat))) + 0.22, pz(lat) + 0.2); cityG.add(l); }
+    const buildCities = () => {
+      cityG.clear();
+      const colPts = [];
+      for (const [city, ps] of byCity) { const lon = ps[0].lon, lat = ps[0].lat; if (lon < LON[0] || lon > LON[1] || lat < LAT[0] || lat > LAT[1]) continue; const ys = d3.extent(ps, (p) => p.year); colPts.push(px(lon), yOf(sample(lon, lat)) + 0.02, pz(lat), px(lon), py(ys[1]), pz(lat)); }
+      const cg = new THREE.BufferGeometry(); cg.setAttribute('position', new THREE.Float32BufferAttribute(colPts, 3));
+      cityG.add(new THREE.LineSegments(cg, new THREE.LineBasicMaterial({ color: '#8fa0c4', transparent: true, opacity: 0.55 })));
+      for (const [c, ps] of byCity) { if (ps.length < 40) continue; const lon = ps[0].lon, lat = ps[0].lat; if (lon < LON[0] || lon > LON[1]) continue; const l = makeLabel(c, 0.34, '#ffffff', 'rgba(11,14,20,0.55)'); l.position.set(px(lon), yOf(sample(lon, lat)) + 0.22, pz(lat) + 0.2); cityG.add(l); }
+    };
+    buildCities(); afterTerrain.push(buildCities);
     // scene labels
     const labG = new THREE.Group(); scene.add(labG);
     scenes.forEach((s, i) => { const l = makeLabel(`${s.scene_id}`, 0.42, '#0b0e14', SCENE_COL[i]); l.position.set(px(s.lon) + (i % 3 - 1) * 0.35, py(s.year_mid) + 0.45, pz(s.lat)); labG.add(l); });
@@ -340,7 +362,10 @@ __LIBS__
     // controls
     document.getElementById('colorBy').addEventListener('change', (e) => { state.mode = e.target.value; recolor(); });
     document.getElementById('showCols').addEventListener('change', (e) => { cityG.visible = e.target.checked; });
-    document.getElementById('showMap').addEventListener('change', (e) => { terrain.visible = e.target.checked; bordersG.visible = e.target.checked; });
+    document.getElementById('showMap').addEventListener('change', (e) => { terrainG.visible = e.target.checked; });
+    const rel = document.getElementById('relief'), relV = document.getElementById('reliefVal');
+    const setRelief = () => { state3.reliefK = rel.value / 100; relV.textContent = `×${Math.round(state3.reliefK * KM_PER_UNIT)}`; updateRelief(); buildCities(); };
+    rel.addEventListener('input', setRelief); relV.textContent = `×${Math.round(state3.reliefK * KM_PER_UNIT)}`;
     document.getElementById('showLabels').addEventListener('change', (e) => { labG.visible = e.target.checked; });
     const yMin = document.getElementById('yearMin'), yMax = document.getElementById('yearMax'), yLab = document.getElementById('yearLabel');
     const years = () => { let a = +yMin.value, b = +yMax.value; if (a > b) [a, b] = [b, a]; state.y0 = a; state.y1 = b; yLab.textContent = `${a}–${b}`; refilter(); };
@@ -348,7 +373,7 @@ __LIBS__
     document.querySelectorAll('.gf').forEach((cb) => cb.addEventListener('change', () => { state.genres = new Set([...document.querySelectorAll('.gf')].filter((c) => c.checked).map((c) => c.value)); refilter(); }));
     let spinning = document.getElementById('spin').checked;
     document.getElementById('spin').addEventListener('change', (e) => { spinning = e.target.checked; });
-    document.getElementById('resetView').addEventListener('click', () => { orbit.theta = -0.42; orbit.phi = 1.18; orbit.r = 29; applyCam(); });
+    document.getElementById('resetView').addEventListener('click', () => { orbit.theta = -0.38; orbit.phi = 1.18; orbit.r = 28; applyCam(); });
     // orbit interaction
     let drag = null;
     canvas.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, th: orbit.theta, ph: orbit.phi }; canvas.setPointerCapture(e.pointerId); spinning = false; document.getElementById('spin').checked = false; });

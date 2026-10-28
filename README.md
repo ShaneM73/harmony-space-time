@@ -23,7 +23,7 @@ classical music or jazz once time is controlled.
 | `docs/` | The web app (self-contained; `vendor/` holds three.js r128 and d3 v7). Enable GitHub Pages on `docs/` to publish it. |
 | `src/app_template.html`, `src/build_site.py` | Template and build script for the app (inlines `data/harmony_data.json`). |
 | `analysis/` | The pipeline: corpus loaders, feature extraction, metrics, location assignment, space-time clustering, Mantel tests. |
-| `data/basemap.json` | ETOPO 1/3° elevations, a hypsometric relief image and country borders cropped to Europe and North America (from the matplotlib/basemap examples and world-atlas), for the 3D base map. |
+| `data/terrain.png`, `data/map_texture.jpg`, `data/basemap_meta.json` | The 3D base map, built by `src/build_basemap.py` in the style of [European_spatiotemporal_geography](https://github.com/ShaneM73/European_spatiotemporal_geography): elevation + land mask (R/G/B PNG, 1/6°), and a tinted, hillshaded texture with country borders (1/16°). Europe, North Africa and the Near East use that project's 5 km terrain (AWS Terrain Tiles, reprojected from LAEA); the rest uses the ETOPO 20-minute grid; land and countries from world-atlas (Natural Earth 50m). |
 | `data/` | Every output table: per-piece metrics (`pieces.csv`, `pieces_located.csv`), era/period/composer summaries, scenes, composer clusters, Mantel results, and the bundled `harmony_data.json` the app reads. |
 
 ## Reproduce
@@ -38,7 +38,8 @@ cd ../analysis
 python load_dcml.py && python load_wir.py && python load_modern.py   # unified chord-event tables (load_wir takes ~8 min)
 python analyze.py && python export_dash.py                            # metrics by era, period, composer
 python locations.py && python space_time.py                           # locations, scenes, composer clusters, Mantel tests
-cd .. && python src/build_site.py                                     # rebuilds docs/index.html
+cd .. && python src/build_basemap.py --etopo <basemap/doc/examples> --europe <European_spatiotemporal_geography> --geo <dir with land.geojson, countries.geojson>
+python src/build_site.py                                              # rebuilds docs/index.html
 ```
 
 `HARMONY_ROOT` can point the scripts at another repository root.

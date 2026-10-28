@@ -1,0 +1,1 @@
+{"lon": [-130.0, 45.0], "lat": [12.0, 70.0], "elevSize": [1051, 349], "elevationOffset": 6000, "texSize": [2801, 929], "sources": ["ETOPO 20-minute grid (NOAA, via matplotlib/basemap examples)", "European_spatiotemporal_geography terrain.png (AWS Terrain Tiles, 5 km LAEA) for Europe, North Africa and the Near East", "world-atlas 50m land and countries (Natural Earth)"]}
