@@ -68,4 +68,4 @@ Broze & Shanahan 2013 · Mauch et al. 2015 · Gauvin 2015 · de Clercq & Temperl
 
 ## Licence
 
-Code: MIT. Derived data tables: under the licences of the source corpora (see `LICENSE`).
+Code: GPL-3.0 (`LICENSE`). Derived data tables: under the licences of the source corpora (`DATA_LICENSE.md`).
