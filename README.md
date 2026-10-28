@@ -20,7 +20,7 @@ classical music or jazz once time is controlled.
 
 | Path | Contents |
 | --- | --- |
-| `index.html`, `app.js`, `report.html`, `findings.html`, `findings.js`, `style.css`, `vendor/` | The web app at the repository root, served by GitHub Pages: the cube, the full report, the findings page, three.js r128 + OrbitControls + d3 v7. It fetches its data from `data/`, so serve it over HTTP (`python -m http.server`). |
+| `index.html`, `app.js`, `composers.html`, `composers.js`, `report.html`, `findings.html`, `findings.js`, `style.css`, `vendor/` | The web app at the repository root, served by GitHub Pages: the cube, the full report, the findings page, three.js r128 + OrbitControls + d3 v7. It fetches its data from `data/`, so serve it over HTTP (`python -m http.server`). |
 | `src/build_site.py`, `src/build_basemap.py` | Derive the artifact page; build the relief base map. |
 | `analysis/` | The pipeline: corpus loaders, feature extraction, metrics, location assignment, space-time clustering, Mantel tests. |
 | `data/terrain.png`, `data/map_texture.jpg`, `data/basemap_meta.json` | The 3D base map, built by `src/build_basemap.py` in the style of [European_spatiotemporal_geography](https://github.com/ShaneM73/European_spatiotemporal_geography): elevation + land mask (R/G/B PNG, 1/6°), and a tinted, hillshaded texture with country borders (1/16°). Europe, North Africa and the Near East use that project's 5 km terrain (AWS Terrain Tiles, reprojected from LAEA); the rest uses the ETOPO 20-minute grid; land and countries from world-atlas (Natural Earth 50m). |
@@ -38,6 +38,7 @@ cd ../analysis
 python load_dcml.py && python load_wir.py && python load_modern.py   # unified chord-event tables (load_wir takes ~8 min)
 python analyze.py && python export_dash.py                            # metrics by era, period, composer
 python locations.py && python space_time.py                           # locations, scenes, composer clusters, Mantel tests
+python composer_space.py                                              # factor/PCA axes, cluster stability for the 3D composer map
 cd .. && python src/build_basemap.py --etopo <basemap/doc/examples> --europe <European_spatiotemporal_geography> --geo <dir with land.geojson, countries.geojson>
 python src/build_site.py                                              # derives build/artifact.html
 ```
