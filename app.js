@@ -15,7 +15,7 @@
   const yearOfY = (y) => YEAR[0] + (y - BASE) / TIME_H * (YEAR[1] - YEAR[0]);
 
   const THEMES = {
-    light: { bg: '#f3f2ee', slabTop: '#e3e1da', slabSide: '#d6d3ca', frame: '#b4babf', dim: 0.55, hemi: 1.0, sun: 0.5, column: '#6b7177', slice: '#d9480f',
+    light: { bg: '#f3f2ee', slabTop: '#e3e1da', slabSide: '#d6d3ca', frame: '#b4babf', dim: 0.55, hemi: 0.55, sun: 0.6, column: '#6b7177', slice: '#d9480f',
              genre: { classical: '#2f5fd0', jazz: '#b7791f', rock_pop: '#c2410c' }, cluster: ['#9aa0a6', '#b7791f', '#7c3aed', '#0f766e', '#c2410c', '#d97706', '#2f5fd0'], rampLo: '#c9ccd1', rampHi: '#d9480f' },
     dark: { bg: '#14171a', slabTop: '#24282c', slabSide: '#1d2125', frame: '#3b4248', dim: 0.3, hemi: 1.0, sun: 0.55, column: '#8fa0c4', slice: '#ff7a45',
             genre: { classical: '#7aa2ff', jazz: '#f2b134', rock_pop: '#ff8a5c' }, cluster: ['#5c6579', '#f2b134', '#c38fe6', '#79c99e', '#e8737a', '#f08a4b', '#7fb3e6'], rampLo: '#3a4663', rampHi: '#ff7a45' },

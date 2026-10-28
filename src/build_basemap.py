@@ -23,9 +23,9 @@ RES_TEX = 1 / 16          # degrees per texture pixel
 OFFSET = 6000
 THEMES = {  # same palettes as European_spatiotemporal_geography
     'dark': dict(palette=['#857558', '#62775a', '#8f675f', '#5f7189', '#857d56', '#75657f', '#537c77', '#8f7853', '#727260', '#885e5d'],
-                 ocean='#1b252c', unclaimed='#2b2e31', border=(16, 19, 22), hill=0.65),
+                 ocean='#1b252c', unclaimed='#2b2e31', border=(16, 19, 22), hill=0.65, gamma=1.0),
     'light': dict(palette=['#d9c7a7', '#b5c9a8', '#e3bcae', '#b8c7da', '#ddd3a3', '#c9b6d2', '#a6cbc4', '#e6c7a0', '#c2c1a8', '#d7aaa9'],
-                  ocean='#dae3e7', unclaimed='#e9e7df', border=(255, 255, 255), hill=0.6),
+                  ocean='#c9d6dc', unclaimed='#dedbd1', border=(255, 255, 255), hill=0.95, gamma=1.6),
 }
 
 # ---------------------------------------------------------------- elevation grids
@@ -135,7 +135,9 @@ for name, T in THEMES.items():
     pal = np.array([hex2rgb(T['unclaimed'])] + [hex2rgb(c) for c in T['palette']])
     tex = pal[np.clip(cidx, 0, len(pal) - 1)]
     tex = np.where(land_t[:, :, None] > 0, tex, hex2rgb(T['ocean'])[None, None, :])
-    tex = tex * (1 - T['hill'] + T['hill'] * hill[:, :, None])
+    # light theme: steeper shading curve so slopes away from the light read as shadow on pale tints
+    h = np.where(land_t > 0, hill ** T['gamma'], 1.0)
+    tex = tex * (1 - T['hill'] + T['hill'] * h[:, :, None])
     arr = np.clip(tex, 0, 255).astype(np.uint8).copy()
     arr[edge] = (arr[edge] * 0.3 + np.array(T['border']) * 0.7).astype(np.uint8)
     img = Image.fromarray(arr, "RGB"); img.save(f"{a.out}/map_texture_{name}.jpg", quality=82, optimize=True)

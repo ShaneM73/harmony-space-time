@@ -4,7 +4,7 @@ How chords evolved from Goudimel (1565) to bebop and 1980s pop, and whether harm
 3,539 expert-annotated pieces from five open corpora are reduced to one chord-feature table, placed in a 3D space-time frame
 (longitude × latitude × year), clustered into scenes, and tested with Mantel statistics.
 
-**Live app:** [shanem73.github.io/harmony-space-time](https://shanem73.github.io/harmony-space-time/) — a 3D space-time cube of all located pieces on a relief map (orbit, map and profile views, a timeline with playback, a selection card for any piece, composer tracing, light and dark themes), and a findings page with every chart. The design follows [European_spatiotemporal_geography](https://github.com/ShaneM73/European_spatiotemporal_geography).
+**Live app:** [shanem73.github.io/harmony-space-time](https://shanem73.github.io/harmony-space-time/) — a 3D space-time cube of all located pieces on a relief map (orbit, map and profile views, a timeline with playback, a selection card for any piece, composer tracing, light and dark themes), a findings page with every chart, and the full written report ([report.html](https://shanem73.github.io/harmony-space-time/report.html)). The design follows [European_spatiotemporal_geography](https://github.com/ShaneM73/European_spatiotemporal_geography).
 
 ## Findings in one paragraph
 
@@ -20,7 +20,7 @@ classical music or jazz once time is controlled.
 
 | Path | Contents |
 | --- | --- |
-| `index.html`, `app.js`, `findings.html`, `findings.js`, `style.css`, `vendor/` | The web app at the repository root, served by GitHub Pages: the cube, the findings page, three.js r128 + OrbitControls + d3 v7. It fetches its data from `data/`, so serve it over HTTP (`python -m http.server`). |
+| `index.html`, `app.js`, `report.html`, `findings.html`, `findings.js`, `style.css`, `vendor/` | The web app at the repository root, served by GitHub Pages: the cube, the full report, the findings page, three.js r128 + OrbitControls + d3 v7. It fetches its data from `data/`, so serve it over HTTP (`python -m http.server`). |
 | `src/build_site.py`, `src/build_basemap.py` | Derive the artifact page; build the relief base map. |
 | `analysis/` | The pipeline: corpus loaders, feature extraction, metrics, location assignment, space-time clustering, Mantel tests. |
 | `data/terrain.png`, `data/map_texture.jpg`, `data/basemap_meta.json` | The 3D base map, built by `src/build_basemap.py` in the style of [European_spatiotemporal_geography](https://github.com/ShaneM73/European_spatiotemporal_geography): elevation + land mask (R/G/B PNG, 1/6°), and a tinted, hillshaded texture with country borders (1/16°). Europe, North Africa and the Near East use that project's 5 km terrain (AWS Terrain Tiles, reprojected from LAEA); the rest uses the ETOPO 20-minute grid; land and countries from world-atlas (Natural Earth 50m). |

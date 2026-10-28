@@ -47,6 +47,7 @@
   timeSeries('ch-seventh', byGenre('seventh_rate'), { ymax: 1 });
   timeSeries('ch-extended', byGenre('extended_rate'));
   timeSeries('ch-nondiatonic', byGenre('nondiatonic_rate'));
+  timeSeries('ch-vtoi-genre', byGenre('V_to_I_share'), { ymax: 1 });
   timeSeries('ch-resolution', byGenre('dom_resolution'), { ymax: 1 });
   const cad = (genre, c0) => [['V_to_I_share', 'V → I', c0], ['IV_to_I_share', 'IV → I', 'var(--iv)'], ['bVII_to_I_share', 'bVII → I', 'var(--bvii)']].map(([m, l, c]) => ({ genre, metric: m, label: l, color: c }));
   timeSeries('ch-cad-classical', cad('classical', GC.classical), { ymax: 0.8, xmin: 1560, xmax: 1940 });
@@ -72,7 +73,7 @@
 
   // root motion stacked bars
   (function () {
-    const el = document.getElementById('ch-motion'); const key = document.getElementById('key-motion'); if (!el) return;
+    const el = document.getElementById('ch-motion'); const key = document.getElementById('key-motion'); if (!el || !key) return;
     const M = [['down5th_share', 'Descending fifth', 'var(--classical)'], ['step_share', 'Step', 'var(--rock)'], ['third_share', 'Third', 'var(--iv)']];
     key.replaceChildren(...M.map(([k, l, c]) => { const s = document.createElement('span'); const i = document.createElement('i'); i.style.background = c; s.append(i, document.createTextNode(l)); return s; }));
     const draw = () => {
@@ -96,7 +97,7 @@
 
   // composer map
   (function () {
-    const el = document.getElementById('ch-map'); const key = document.getElementById('key-clusters'); if (!el) return;
+    const el = document.getElementById('ch-map'); const key = document.getElementById('key-clusters'); if (!el || !key) return;
     key.replaceChildren(...[1, 2, 3, 4, 5, 6].map((k) => { const s = document.createElement('span'); const i = document.createElement('i'); i.style.background = CLC[k]; s.append(i, document.createTextNode(`${k}. ${CL[k]}`)); return s; }));
     const draw = () => {
       const W = Math.max(300, el.clientWidth), H = 460, m = 18; el.replaceChildren();
@@ -112,13 +113,13 @@
       const nodes = labs.nodes(); for (let pass = 0; pass < 12; pass++) { let moved = false; for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) { const a = nodes[i].getBBox(), b = nodes[j].getBBox(); if (a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height) { const lower = a.y > b.y ? nodes[i] : nodes[j]; lower.setAttribute('y', +lower.getAttribute('y') + 11); moved = true; } } if (!moved) break; }
     };
     draw(); new ResizeObserver(draw).observe(el); addEventListener('resize', draw);
-    const lists = document.getElementById('cluster-lists');
+    const lists = document.getElementById('cluster-lists'); if (!lists) return;
     for (let k = 1; k <= 6; k++) { const d = document.createElement('div'); d.className = 'c'; d.style.borderColor = CLC[k]; const b = document.createElement('b'); b.textContent = `${k}. ${CL[k]}`; d.append(b, document.createTextNode(composers.filter((r) => r.harmonic_cluster === k).sort((a, b) => a.year - b.year).map((r) => `${r.unit} (${Math.round(r.year)})`).join(' · '))); lists.append(d); }
   })();
 
   // scenes + mantel tables
   (function () {
-    const tb = document.querySelector('#tbl-scenes tbody');
+    const tb = document.querySelector('#tbl-scenes tbody'); if (!tb) return;
     for (const s of scenes) { const tr = document.createElement('tr'); const td = (t, cls) => { const d = document.createElement('td'); if (cls) d.className = cls; d.textContent = t; tr.append(d); return d; }; const c = td(s.scene); c.style.borderLeft = `4px solid ${SCENE_COL[s.scene_id - 1]}`; td(s.n_pieces, 'num'); td(GL[s.genre]); td(s.top_composers); td(pct(s.seventh_rate), 'num'); td(pct(s.nondiatonic_rate), 'num'); td(pct(s.V_to_I_share), 'num'); td(pct(s.down5th_share), 'num'); td(s.harmonic_group, 'num'); tb.append(tr); }
     const mb = document.querySelector('#tbl-mantel tbody'); const f2 = d3.format('.2f'), fp = (v) => v < 0.001 ? '<0.001' : d3.format('.3f')(v);
     for (const r of DATA.mantel) { const tr = document.createElement('tr'); const td = (t, cls, strong) => { const d = document.createElement('td'); if (cls) d.className = cls; d.textContent = t; if (strong) d.style.fontWeight = '600'; tr.append(d); }; td(r.subset); td(r.n_units, 'num'); td(f2(r.r_harmony_time), 'num', r.p_time < 0.05); td(fp(r.p_time), 'num'); td(f2(r.r_harmony_geo), 'num', r.p_geo < 0.05); td(fp(r.p_geo), 'num'); td(f2(r.r_geo_given_time), 'num', r.p_geo_given_time < 0.05); td(fp(r.p_geo_given_time), 'num'); td(f2(r.r_time_given_geo), 'num', r.p_time_given_geo < 0.05); td(fp(r.p_time_given_geo), 'num'); mb.append(tr); }
