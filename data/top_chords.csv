@@ -1,0 +1,226 @@
+era,rank,chord,share
+Renaissance (<1600),1,I,0.2423
+Renaissance (<1600),2,V,0.2077
+Renaissance (<1600),3,IV,0.1083
+Renaissance (<1600),4,i,0.0872
+Renaissance (<1600),5,ii,0.0758
+Renaissance (<1600),6,vi,0.0607
+Renaissance (<1600),7,v,0.0286
+Renaissance (<1600),8,iii,0.0234
+Renaissance (<1600),9,iv,0.0189
+Renaissance (<1600),10,III,0.017
+Renaissance (<1600),11,VI,0.0157
+Renaissance (<1600),12,II,0.0139
+Renaissance (<1600),13,VII,0.0131
+Renaissance (<1600),14,V7,0.0126
+Renaissance (<1600),15,vii°,0.0118
+Early Baroque (1600-99),1,V,0.1515
+Early Baroque (1600-99),2,I,0.1276
+Early Baroque (1600-99),3,i,0.1189
+Early Baroque (1600-99),4,IV,0.0747
+Early Baroque (1600-99),5,iv,0.0505
+Early Baroque (1600-99),6,v,0.0488
+Early Baroque (1600-99),7,ii,0.0459
+Early Baroque (1600-99),8,III,0.0432
+Early Baroque (1600-99),9,VII,0.0415
+Early Baroque (1600-99),10,VI,0.0334
+Early Baroque (1600-99),11,V7,0.0319
+Early Baroque (1600-99),12,II,0.0237
+Early Baroque (1600-99),13,vi,0.0234
+Early Baroque (1600-99),14,ii7,0.0127
+Early Baroque (1600-99),15,#vii°,0.0116
+Late Baroque (1700-49),1,V,0.1562
+Late Baroque (1700-49),2,I,0.1488
+Late Baroque (1700-49),3,i,0.1247
+Late Baroque (1700-49),4,V7,0.1135
+Late Baroque (1700-49),5,IV,0.0497
+Late Baroque (1700-49),6,iv,0.0415
+Late Baroque (1700-49),7,ii,0.0293
+Late Baroque (1700-49),8,#vii°,0.0227
+Late Baroque (1700-49),9,vii°,0.0193
+Late Baroque (1700-49),10,ii7,0.019
+Late Baroque (1700-49),11,ii°7,0.0189
+Late Baroque (1700-49),12,vi,0.0186
+Late Baroque (1700-49),13,ii°,0.0181
+Late Baroque (1700-49),14,I7,0.0173
+Late Baroque (1700-49),15,VI,0.0165
+Classical (1750-99),1,I,0.2163
+Classical (1750-99),2,V7,0.1535
+Classical (1750-99),3,V,0.1469
+Classical (1750-99),4,i,0.0733
+Classical (1750-99),5,IV,0.0567
+Classical (1750-99),6,ii,0.0525
+Classical (1750-99),7,vii°,0.0258
+Classical (1750-99),8,vi,0.0221
+Classical (1750-99),9,iv,0.0219
+Classical (1750-99),10,II7,0.0169
+Classical (1750-99),11,I7,0.0166
+Classical (1750-99),12,#iv°7,0.0149
+Classical (1750-99),13,#iv°,0.01
+Classical (1750-99),14,ii°,0.0099
+Classical (1750-99),15,VI,0.0098
+Early Romantic (1800-49),1,I,0.1715
+Early Romantic (1800-49),2,V7,0.1538
+Early Romantic (1800-49),3,V,0.1245
+Early Romantic (1800-49),4,i,0.0869
+Early Romantic (1800-49),5,IV,0.0435
+Early Romantic (1800-49),6,ii,0.0329
+Early Romantic (1800-49),7,iv,0.0278
+Early Romantic (1800-49),8,II7,0.0222
+Early Romantic (1800-49),9,vi,0.0207
+Early Romantic (1800-49),10,I7,0.0206
+Early Romantic (1800-49),11,#iv°7,0.0178
+Early Romantic (1800-49),12,vii°,0.0147
+Early Romantic (1800-49),13,V9,0.013
+Early Romantic (1800-49),14,VI,0.0129
+Early Romantic (1800-49),15,vii°7,0.0121
+Late Romantic (1850-99),1,I,0.156
+Late Romantic (1850-99),2,V7,0.1215
+Late Romantic (1850-99),3,V,0.1027
+Late Romantic (1850-99),4,i,0.074
+Late Romantic (1850-99),5,IV,0.0406
+Late Romantic (1850-99),6,V9,0.0302
+Late Romantic (1850-99),7,ii,0.0239
+Late Romantic (1850-99),8,iv,0.0236
+Late Romantic (1850-99),9,I7,0.0214
+Late Romantic (1850-99),10,vi,0.0207
+Late Romantic (1850-99),11,ii°7,0.0206
+Late Romantic (1850-99),12,vii°7,0.0204
+Late Romantic (1850-99),13,II7,0.0199
+Late Romantic (1850-99),14,#iv°7,0.0184
+Late Romantic (1850-99),15,ii7,0.0175
+Early 20th c. (1900-49),1,i,0.0865
+Early 20th c. (1900-49),2,V7,0.0739
+Early 20th c. (1900-49),3,I,0.0707
+Early 20th c. (1900-49),4,V,0.0657
+Early 20th c. (1900-49),5,iv,0.0279
+Early 20th c. (1900-49),6,V9,0.027
+Early 20th c. (1900-49),7,I7,0.0239
+Early 20th c. (1900-49),8,IV,0.0233
+Early 20th c. (1900-49),9,III,0.0217
+Early 20th c. (1900-49),10,IV7,0.0215
+Early 20th c. (1900-49),11,ii°7,0.0195
+Early 20th c. (1900-49),12,i7,0.0194
+Early 20th c. (1900-49),13,VI,0.0185
+Early 20th c. (1900-49),14,I9,0.0171
+Early 20th c. (1900-49),15,ii7,0.0163
+Jazz: Swing era (<1945),1,V7,0.1746
+Jazz: Swing era (<1945),2,I,0.1605
+Jazz: Swing era (<1945),3,ii7,0.0732
+Jazz: Swing era (<1945),4,I7,0.0632
+Jazz: Swing era (<1945),5,II7,0.0548
+Jazz: Swing era (<1945),6,VI7,0.0544
+Jazz: Swing era (<1945),7,vi7,0.0364
+Jazz: Swing era (<1945),8,III7,0.032
+Jazz: Swing era (<1945),9,IV7,0.0311
+Jazz: Swing era (<1945),10,IV,0.0272
+Jazz: Swing era (<1945),11,i,0.0263
+Jazz: Swing era (<1945),12,VII7,0.0206
+Jazz: Swing era (<1945),13,ii,0.0202
+Jazz: Swing era (<1945),14,iii7,0.0189
+Jazz: Swing era (<1945),15,VI,0.0162
+Jazz: Bebop/Hard bop (1945-59),1,I7,0.1539
+Jazz: Bebop/Hard bop (1945-59),2,V7,0.1359
+Jazz: Bebop/Hard bop (1945-59),3,ii7,0.104
+Jazz: Bebop/Hard bop (1945-59),4,IV7,0.0629
+Jazz: Bebop/Hard bop (1945-59),5,VI7,0.0611
+Jazz: Bebop/Hard bop (1945-59),6,I,0.0337
+Jazz: Bebop/Hard bop (1945-59),7,II7,0.03
+Jazz: Bebop/Hard bop (1945-59),8,i7,0.0287
+Jazz: Bebop/Hard bop (1945-59),9,iii7,0.0277
+Jazz: Bebop/Hard bop (1945-59),10,III7,0.025
+Jazz: Bebop/Hard bop (1945-59),11,i,0.0222
+Jazz: Bebop/Hard bop (1945-59),12,vi7,0.022
+Jazz: Bebop/Hard bop (1945-59),13,VII7,0.0217
+Jazz: Bebop/Hard bop (1945-59),14,ii°7,0.0216
+Jazz: Bebop/Hard bop (1945-59),15,bVII7,0.021
+Jazz: Modal/Post-bop (1960-74),1,I7,0.1103
+Jazz: Modal/Post-bop (1960-74),2,V7,0.0989
+Jazz: Modal/Post-bop (1960-74),3,ii7,0.0654
+Jazz: Modal/Post-bop (1960-74),4,IV7,0.0434
+Jazz: Modal/Post-bop (1960-74),5,VI7,0.0425
+Jazz: Modal/Post-bop (1960-74),6,i7,0.0348
+Jazz: Modal/Post-bop (1960-74),7,bII7,0.0307
+Jazz: Modal/Post-bop (1960-74),8,II7,0.0298
+Jazz: Modal/Post-bop (1960-74),9,I,0.0287
+Jazz: Modal/Post-bop (1960-74),10,VIIsus,0.0236
+Jazz: Modal/Post-bop (1960-74),11,III7,0.0212
+Jazz: Modal/Post-bop (1960-74),12,VII7,0.0193
+Jazz: Modal/Post-bop (1960-74),13,i,0.019
+Jazz: Modal/Post-bop (1960-74),14,ii°7,0.0184
+Jazz: Modal/Post-bop (1960-74),15,iii7,0.0182
+Jazz: 1975+,1,I7,0.1221
+Jazz: 1975+,2,V7,0.1167
+Jazz: 1975+,3,ii7,0.0901
+Jazz: 1975+,4,VI7,0.066
+Jazz: 1975+,5,IV7,0.0548
+Jazz: 1975+,6,I,0.0358
+Jazz: 1975+,7,II7,0.0324
+Jazz: 1975+,8,i7,0.0323
+Jazz: 1975+,9,iii7,0.0297
+Jazz: 1975+,10,III7,0.0288
+Jazz: 1975+,11,vi7,0.0243
+Jazz: 1975+,12,v7,0.0223
+Jazz: 1975+,13,V9,0.0186
+Jazz: 1975+,14,i,0.0186
+Jazz: 1975+,15,iv7,0.0181
+Rock/Pop 1950-64,1,I,0.2803
+Rock/Pop 1950-64,2,IV,0.1744
+Rock/Pop 1950-64,3,V,0.1083
+Rock/Pop 1950-64,4,V7,0.0824
+Rock/Pop 1950-64,5,vi,0.0648
+Rock/Pop 1950-64,6,I7,0.0497
+Rock/Pop 1950-64,7,IV7,0.0321
+Rock/Pop 1950-64,8,ii7,0.0229
+Rock/Pop 1950-64,9,ii,0.0182
+Rock/Pop 1950-64,10,II7,0.0129
+Rock/Pop 1950-64,11,bVII,0.0125
+Rock/Pop 1950-64,12,i,0.0103
+Rock/Pop 1950-64,13,II,0.0102
+Rock/Pop 1950-64,14,Isus9,0.0078
+Rock/Pop 1950-64,15,iv,0.0074
+Rock/Pop 1965-74,1,I,0.2133
+Rock/Pop 1965-74,2,IV,0.1745
+Rock/Pop 1965-74,3,V,0.0985
+Rock/Pop 1965-74,4,i,0.0482
+Rock/Pop 1965-74,5,V7,0.0359
+Rock/Pop 1965-74,6,vi,0.032
+Rock/Pop 1965-74,7,bVII,0.0305
+Rock/Pop 1965-74,8,ii,0.0279
+Rock/Pop 1965-74,9,I7,0.0266
+Rock/Pop 1965-74,10,VII,0.0225
+Rock/Pop 1965-74,11,IV7,0.0201
+Rock/Pop 1965-74,12,VI,0.02
+Rock/Pop 1965-74,13,ii7,0.0195
+Rock/Pop 1965-74,14,III,0.0184
+Rock/Pop 1965-74,15,II,0.014
+Rock/Pop 1975-84,1,I,0.1829
+Rock/Pop 1975-84,2,IV,0.1394
+Rock/Pop 1975-84,3,V,0.1013
+Rock/Pop 1975-84,4,bVII,0.0404
+Rock/Pop 1975-84,5,i,0.0387
+Rock/Pop 1975-84,6,VII,0.0326
+Rock/Pop 1975-84,7,vi,0.0298
+Rock/Pop 1975-84,8,ii,0.0238
+Rock/Pop 1975-84,9,ii7,0.0209
+Rock/Pop 1975-84,10,VI,0.0203
+Rock/Pop 1975-84,11,V7,0.0197
+Rock/Pop 1975-84,12,I7,0.0188
+Rock/Pop 1975-84,13,I5,0.0181
+Rock/Pop 1975-84,14,iii7,0.0154
+Rock/Pop 1975-84,15,iv,0.0154
+Rock/Pop 1985+,1,I,0.1721
+Rock/Pop 1985+,2,IV,0.1506
+Rock/Pop 1985+,3,V,0.1156
+Rock/Pop 1985+,4,i,0.0442
+Rock/Pop 1985+,5,vi,0.0376
+Rock/Pop 1985+,6,VI,0.0335
+Rock/Pop 1985+,7,VII,0.0297
+Rock/Pop 1985+,8,bVII,0.0274
+Rock/Pop 1985+,9,ii,0.0204
+Rock/Pop 1985+,10,vi7,0.0202
+Rock/Pop 1985+,11,ii7,0.0179
+Rock/Pop 1985+,12,IV9,0.0167
+Rock/Pop 1985+,13,i7,0.0155
+Rock/Pop 1985+,14,III,0.0147
+Rock/Pop 1985+,15,I5,0.0144

@@ -1,0 +1,433 @@
+genre,genre_label,from_pc,to_pc,from_degree,to_degree,share
+classical,Classical,0,0,I,I,0.0
+classical,Classical,0,1,I,bII,0.00341
+classical,Classical,0,2,I,II,0.04361
+classical,Classical,0,3,I,bIII,0.00152
+classical,Classical,0,4,I,III,0.00503
+classical,Classical,0,5,I,IV,0.06545
+classical,Classical,0,6,I,#IV,0.00843
+classical,Classical,0,7,I,V,0.1285
+classical,Classical,0,8,I,bVI,0.00453
+classical,Classical,0,9,I,VI,0.01868
+classical,Classical,0,10,I,bVII,0.00193
+classical,Classical,0,11,I,VII,0.02013
+classical,Classical,1,0,bII,I,0.00054
+classical,Classical,1,1,bII,bII,0.0
+classical,Classical,1,2,bII,II,0.00618
+classical,Classical,1,3,bII,bIII,0.00016
+classical,Classical,1,4,bII,III,0.00019
+classical,Classical,1,5,bII,IV,0.00028
+classical,Classical,1,6,bII,#IV,0.00046
+classical,Classical,1,7,bII,V,0.0021
+classical,Classical,1,8,bII,bVI,0.00034
+classical,Classical,1,9,bII,VI,0.00082
+classical,Classical,1,10,bII,bVII,0.00022
+classical,Classical,1,11,bII,VII,0.00027
+classical,Classical,2,0,II,I,0.01599
+classical,Classical,2,1,II,bII,0.00153
+classical,Classical,2,2,II,II,0.0
+classical,Classical,2,3,II,bIII,0.00104
+classical,Classical,2,4,II,III,0.00395
+classical,Classical,2,5,II,IV,0.00274
+classical,Classical,2,6,II,#IV,0.00287
+classical,Classical,2,7,II,V,0.06868
+classical,Classical,2,8,II,bVI,0.00108
+classical,Classical,2,9,II,VI,0.00518
+classical,Classical,2,10,II,bVII,0.00081
+classical,Classical,2,11,II,VII,0.00832
+classical,Classical,3,0,bIII,I,0.00204
+classical,Classical,3,1,bIII,bII,0.00022
+classical,Classical,3,2,bIII,II,0.00065
+classical,Classical,3,3,bIII,bIII,0.0
+classical,Classical,3,4,bIII,III,0.0015
+classical,Classical,3,5,bIII,IV,0.00071
+classical,Classical,3,6,bIII,#IV,0.00022
+classical,Classical,3,7,bIII,V,0.00075
+classical,Classical,3,8,bIII,bVI,0.00179
+classical,Classical,3,9,bIII,VI,0.00036
+classical,Classical,3,10,bIII,bVII,0.00067
+classical,Classical,3,11,bIII,VII,0.00036
+classical,Classical,4,0,III,I,0.0029
+classical,Classical,4,1,III,bII,0.00068
+classical,Classical,4,2,III,II,0.00379
+classical,Classical,4,3,III,bIII,0.00067
+classical,Classical,4,4,III,III,0.0
+classical,Classical,4,5,III,IV,0.00729
+classical,Classical,4,6,III,#IV,0.00042
+classical,Classical,4,7,III,V,0.00185
+classical,Classical,4,8,III,bVI,0.00051
+classical,Classical,4,9,III,VI,0.01087
+classical,Classical,4,10,III,bVII,0.00023
+classical,Classical,4,11,III,VII,0.00136
+classical,Classical,5,0,IV,I,0.0295
+classical,Classical,5,1,IV,bII,0.00095
+classical,Classical,5,2,IV,II,0.0149
+classical,Classical,5,3,IV,bIII,0.00096
+classical,Classical,5,4,IV,III,0.00424
+classical,Classical,5,5,IV,IV,0.0
+classical,Classical,5,6,IV,#IV,0.00262
+classical,Classical,5,7,IV,V,0.02938
+classical,Classical,5,8,IV,bVI,0.00071
+classical,Classical,5,9,IV,VI,0.00261
+classical,Classical,5,10,IV,bVII,0.00303
+classical,Classical,5,11,IV,VII,0.00851
+classical,Classical,6,0,#IV,I,0.00234
+classical,Classical,6,1,#IV,bII,0.00016
+classical,Classical,6,2,#IV,II,0.00179
+classical,Classical,6,3,#IV,bIII,0.00026
+classical,Classical,6,4,#IV,III,0.00027
+classical,Classical,6,5,#IV,IV,0.00035
+classical,Classical,6,6,#IV,#IV,0.0
+classical,Classical,6,7,#IV,V,0.01898
+classical,Classical,6,8,#IV,bVI,0.00039
+classical,Classical,6,9,#IV,VI,0.00022
+classical,Classical,6,10,#IV,bVII,9e-05
+classical,Classical,6,11,#IV,VII,0.00136
+classical,Classical,7,0,V,I,0.20749
+classical,Classical,7,1,V,bII,0.00236
+classical,Classical,7,2,V,II,0.01331
+classical,Classical,7,3,V,bIII,0.00099
+classical,Classical,7,4,V,III,0.00534
+classical,Classical,7,5,V,IV,0.01094
+classical,Classical,7,6,V,#IV,0.00653
+classical,Classical,7,7,V,V,0.0
+classical,Classical,7,8,V,bVI,0.00439
+classical,Classical,7,9,V,VI,0.01537
+classical,Classical,7,10,V,bVII,0.00081
+classical,Classical,7,11,V,VII,0.00635
+classical,Classical,8,0,bVI,I,0.00155
+classical,Classical,8,1,bVI,bII,0.0007
+classical,Classical,8,2,bVI,II,0.00196
+classical,Classical,8,3,bVI,bIII,0.00081
+classical,Classical,8,4,bVI,III,0.00055
+classical,Classical,8,5,bVI,IV,0.00158
+classical,Classical,8,6,bVI,#IV,0.00123
+classical,Classical,8,7,bVI,V,0.00237
+classical,Classical,8,8,bVI,bVI,0.0
+classical,Classical,8,9,bVI,VI,0.00403
+classical,Classical,8,10,bVI,bVII,0.00036
+classical,Classical,8,11,bVI,VII,0.0006
+classical,Classical,9,0,VI,I,0.00587
+classical,Classical,9,1,VI,bII,0.00081
+classical,Classical,9,2,VI,II,0.02431
+classical,Classical,9,3,VI,bIII,0.00042
+classical,Classical,9,4,VI,III,0.0044
+classical,Classical,9,5,VI,IV,0.00565
+classical,Classical,9,6,VI,#IV,0.00252
+classical,Classical,9,7,VI,V,0.01105
+classical,Classical,9,8,VI,bVI,0.00111
+classical,Classical,9,9,VI,VI,0.0
+classical,Classical,9,10,VI,bVII,0.00095
+classical,Classical,9,11,VI,VII,0.00383
+classical,Classical,10,0,bVII,I,0.00168
+classical,Classical,10,1,bVII,bII,0.00028
+classical,Classical,10,2,bVII,II,0.00038
+classical,Classical,10,3,bVII,bIII,0.00215
+classical,Classical,10,4,bVII,III,0.00058
+classical,Classical,10,5,bVII,IV,0.00121
+classical,Classical,10,6,bVII,#IV,0.00015
+classical,Classical,10,7,bVII,V,0.00146
+classical,Classical,10,8,bVII,bVI,0.00038
+classical,Classical,10,9,bVII,VI,0.0006
+classical,Classical,10,10,bVII,bVII,0.0
+classical,Classical,10,11,bVII,VII,0.00052
+classical,Classical,11,0,VII,I,0.03223
+classical,Classical,11,1,VII,bII,0.00045
+classical,Classical,11,2,VII,II,0.00126
+classical,Classical,11,3,VII,bIII,0.00027
+classical,Classical,11,4,VII,III,0.00447
+classical,Classical,11,5,VII,IV,0.00117
+classical,Classical,11,6,VII,#IV,0.00075
+classical,Classical,11,7,VII,V,0.00815
+classical,Classical,11,8,VII,bVI,0.00052
+classical,Classical,11,9,VII,VI,0.00209
+classical,Classical,11,10,VII,bVII,0.0003
+classical,Classical,11,11,VII,VII,0.0
+jazz,Jazz,0,0,I,I,0.0
+jazz,Jazz,0,1,I,bII,0.00492
+jazz,Jazz,0,2,I,II,0.02553
+jazz,Jazz,0,3,I,bIII,0.00692
+jazz,Jazz,0,4,I,III,0.01546
+jazz,Jazz,0,5,I,IV,0.07385
+jazz,Jazz,0,6,I,#IV,0.00524
+jazz,Jazz,0,7,I,V,0.0272
+jazz,Jazz,0,8,I,bVI,0.00362
+jazz,Jazz,0,9,I,VI,0.03472
+jazz,Jazz,0,10,I,bVII,0.00487
+jazz,Jazz,0,11,I,VII,0.01597
+jazz,Jazz,1,0,bII,I,0.00863
+jazz,Jazz,1,1,bII,bII,0.0
+jazz,Jazz,1,2,bII,II,0.0046
+jazz,Jazz,1,3,bII,bIII,0.0013
+jazz,Jazz,1,4,bII,III,0.00102
+jazz,Jazz,1,5,bII,IV,0.00037
+jazz,Jazz,1,6,bII,#IV,0.00743
+jazz,Jazz,1,7,bII,V,0.00046
+jazz,Jazz,1,8,bII,bVI,0.00014
+jazz,Jazz,1,9,bII,VI,0.00065
+jazz,Jazz,1,10,bII,bVII,0.0
+jazz,Jazz,1,11,bII,VII,0.00121
+jazz,Jazz,2,0,II,I,0.00511
+jazz,Jazz,2,1,II,bII,0.00752
+jazz,Jazz,2,2,II,II,0.0
+jazz,Jazz,2,3,II,bIII,0.00534
+jazz,Jazz,2,4,II,III,0.00274
+jazz,Jazz,2,5,II,IV,0.00167
+jazz,Jazz,2,6,II,#IV,0.00088
+jazz,Jazz,2,7,II,V,0.12216
+jazz,Jazz,2,8,II,bVI,0.00162
+jazz,Jazz,2,9,II,VI,0.00357
+jazz,Jazz,2,10,II,bVII,0.00107
+jazz,Jazz,2,11,II,VII,0.00237
+jazz,Jazz,3,0,bIII,I,0.00223
+jazz,Jazz,3,1,bIII,bII,0.00135
+jazz,Jazz,3,2,bIII,II,0.01369
+jazz,Jazz,3,3,bIII,bIII,0.0
+jazz,Jazz,3,4,bIII,III,0.00107
+jazz,Jazz,3,5,bIII,IV,0.00111
+jazz,Jazz,3,6,bIII,#IV,0.00023
+jazz,Jazz,3,7,bIII,V,0.00051
+jazz,Jazz,3,8,bIII,bVI,0.01235
+jazz,Jazz,3,9,bIII,VI,0.00074
+jazz,Jazz,3,10,bIII,bVII,0.00019
+jazz,Jazz,3,11,bIII,VII,0.00111
+jazz,Jazz,4,0,III,I,0.0006
+jazz,Jazz,4,1,III,bII,0.00019
+jazz,Jazz,4,2,III,II,0.00232
+jazz,Jazz,4,3,III,bIII,0.00789
+jazz,Jazz,4,4,III,III,0.0
+jazz,Jazz,4,5,III,IV,0.00232
+jazz,Jazz,4,6,III,#IV,0.00125
+jazz,Jazz,4,7,III,V,0.00381
+jazz,Jazz,4,8,III,bVI,0.00051
+jazz,Jazz,4,9,III,VI,0.05171
+jazz,Jazz,4,10,III,bVII,0.00111
+jazz,Jazz,4,11,III,VII,0.00074
+jazz,Jazz,5,0,IV,I,0.03852
+jazz,Jazz,5,1,IV,bII,0.00028
+jazz,Jazz,5,2,IV,II,0.00339
+jazz,Jazz,5,3,IV,bIII,0.00158
+jazz,Jazz,5,4,IV,III,0.01244
+jazz,Jazz,5,5,IV,IV,0.0
+jazz,Jazz,5,6,IV,#IV,0.00576
+jazz,Jazz,5,7,IV,V,0.00483
+jazz,Jazz,5,8,IV,bVI,0.00051
+jazz,Jazz,5,9,IV,VI,0.00074
+jazz,Jazz,5,10,IV,bVII,0.01908
+jazz,Jazz,5,11,IV,VII,0.00102
+jazz,Jazz,6,0,#IV,I,0.00357
+jazz,Jazz,6,1,#IV,bII,0.00042
+jazz,Jazz,6,2,#IV,II,0.00084
+jazz,Jazz,6,3,#IV,bIII,0.0006
+jazz,Jazz,6,4,#IV,III,0.00172
+jazz,Jazz,6,5,#IV,IV,0.00408
+jazz,Jazz,6,6,#IV,#IV,0.0
+jazz,Jazz,6,7,#IV,V,0.0019
+jazz,Jazz,6,8,#IV,bVI,9e-05
+jazz,Jazz,6,9,#IV,VI,0.00051
+jazz,Jazz,6,10,#IV,bVII,0.0
+jazz,Jazz,6,11,#IV,VII,0.01216
+jazz,Jazz,7,0,V,I,0.14124
+jazz,Jazz,7,1,V,bII,0.00107
+jazz,Jazz,7,2,V,II,0.00757
+jazz,Jazz,7,3,V,bIII,0.00046
+jazz,Jazz,7,4,V,III,0.00826
+jazz,Jazz,7,5,V,IV,0.00204
+jazz,Jazz,7,6,V,#IV,0.00149
+jazz,Jazz,7,7,V,V,0.0
+jazz,Jazz,7,8,V,bVI,0.00218
+jazz,Jazz,7,9,V,VI,0.0019
+jazz,Jazz,7,10,V,bVII,0.00144
+jazz,Jazz,7,11,V,VII,0.00065
+jazz,Jazz,8,0,bVI,I,0.00074
+jazz,Jazz,8,1,bVI,bII,0.00896
+jazz,Jazz,8,2,bVI,II,0.00529
+jazz,Jazz,8,3,bVI,bIII,5e-05
+jazz,Jazz,8,4,bVI,III,0.00056
+jazz,Jazz,8,5,bVI,IV,0.00023
+jazz,Jazz,8,6,bVI,#IV,0.00023
+jazz,Jazz,8,7,bVI,V,0.00441
+jazz,Jazz,8,8,bVI,bVI,0.0
+jazz,Jazz,8,9,bVI,VI,0.00223
+jazz,Jazz,8,10,bVI,bVII,0.0006
+jazz,Jazz,8,11,bVI,VII,0.00237
+jazz,Jazz,9,0,VI,I,0.00223
+jazz,Jazz,9,1,VI,bII,0.00032
+jazz,Jazz,9,2,VI,II,0.08721
+jazz,Jazz,9,3,VI,bIII,0.00107
+jazz,Jazz,9,4,VI,III,0.00214
+jazz,Jazz,9,5,VI,IV,0.00149
+jazz,Jazz,9,6,VI,#IV,0.00274
+jazz,Jazz,9,7,VI,V,0.00125
+jazz,Jazz,9,8,VI,bVI,0.00265
+jazz,Jazz,9,9,VI,VI,0.0
+jazz,Jazz,9,10,VI,bVII,0.00241
+jazz,Jazz,9,11,VI,VII,0.00121
+jazz,Jazz,10,0,bVII,I,0.00636
+jazz,Jazz,10,1,bVII,bII,0.00037
+jazz,Jazz,10,2,bVII,II,0.00149
+jazz,Jazz,10,3,bVII,bIII,0.00924
+jazz,Jazz,10,4,bVII,III,0.00371
+jazz,Jazz,10,5,bVII,IV,0.00088
+jazz,Jazz,10,6,bVII,#IV,5e-05
+jazz,Jazz,10,7,bVII,V,0.00153
+jazz,Jazz,10,8,bVII,bVI,0.00135
+jazz,Jazz,10,9,bVII,VI,0.00831
+jazz,Jazz,10,10,bVII,bVII,0.0
+jazz,Jazz,10,11,bVII,VII,0.00506
+jazz,Jazz,11,0,VII,I,0.00761
+jazz,Jazz,11,1,VII,bII,0.00046
+jazz,Jazz,11,2,VII,II,0.00107
+jazz,Jazz,11,3,VII,bIII,0.00014
+jazz,Jazz,11,4,VII,III,0.02325
+jazz,Jazz,11,5,VII,IV,0.00102
+jazz,Jazz,11,6,VII,#IV,0.0006
+jazz,Jazz,11,7,VII,V,0.00097
+jazz,Jazz,11,8,VII,bVI,0.0007
+jazz,Jazz,11,9,VII,VI,0.00028
+jazz,Jazz,11,10,VII,bVII,0.00766
+jazz,Jazz,11,11,VII,VII,0.0
+rock_pop,Rock & pop,0,0,I,I,0.0
+rock_pop,Rock & pop,0,1,I,bII,0.00063
+rock_pop,Rock & pop,0,2,I,II,0.02831
+rock_pop,Rock & pop,0,3,I,bIII,0.00666
+rock_pop,Rock & pop,0,4,I,III,0.00841
+rock_pop,Rock & pop,0,5,I,IV,0.11554
+rock_pop,Rock & pop,0,6,I,#IV,0.00064
+rock_pop,Rock & pop,0,7,I,V,0.06643
+rock_pop,Rock & pop,0,8,I,bVI,0.00329
+rock_pop,Rock & pop,0,9,I,VI,0.03401
+rock_pop,Rock & pop,0,10,I,bVII,0.02727
+rock_pop,Rock & pop,0,11,I,VII,0.00136
+rock_pop,Rock & pop,1,0,bII,I,0.00121
+rock_pop,Rock & pop,1,1,bII,bII,0.0
+rock_pop,Rock & pop,1,2,bII,II,0.00039
+rock_pop,Rock & pop,1,3,bII,bIII,0.00026
+rock_pop,Rock & pop,1,4,bII,III,1e-05
+rock_pop,Rock & pop,1,5,bII,IV,0.00024
+rock_pop,Rock & pop,1,6,bII,#IV,0.0013
+rock_pop,Rock & pop,1,7,bII,V,0.00017
+rock_pop,Rock & pop,1,8,bII,bVI,0.0015
+rock_pop,Rock & pop,1,9,bII,VI,0.0
+rock_pop,Rock & pop,1,10,bII,bVII,0.00024
+rock_pop,Rock & pop,1,11,bII,VII,0.00024
+rock_pop,Rock & pop,2,0,II,I,0.01723
+rock_pop,Rock & pop,2,1,II,bII,0.00058
+rock_pop,Rock & pop,2,2,II,II,0.0
+rock_pop,Rock & pop,2,3,II,bIII,0.00036
+rock_pop,Rock & pop,2,4,II,III,0.00506
+rock_pop,Rock & pop,2,5,II,IV,0.01243
+rock_pop,Rock & pop,2,6,II,#IV,0.00042
+rock_pop,Rock & pop,2,7,II,V,0.03034
+rock_pop,Rock & pop,2,8,II,bVI,0.00022
+rock_pop,Rock & pop,2,9,II,VI,0.00424
+rock_pop,Rock & pop,2,10,II,bVII,0.00326
+rock_pop,Rock & pop,2,11,II,VII,0.0005
+rock_pop,Rock & pop,3,0,bIII,I,0.00194
+rock_pop,Rock & pop,3,1,bIII,bII,0.00041
+rock_pop,Rock & pop,3,2,bIII,II,0.00154
+rock_pop,Rock & pop,3,3,bIII,bIII,0.0
+rock_pop,Rock & pop,3,4,bIII,III,0.00015
+rock_pop,Rock & pop,3,5,bIII,IV,0.00537
+rock_pop,Rock & pop,3,6,bIII,#IV,0.00022
+rock_pop,Rock & pop,3,7,bIII,V,0.0011
+rock_pop,Rock & pop,3,8,bIII,bVI,0.00148
+rock_pop,Rock & pop,3,9,bIII,VI,4e-05
+rock_pop,Rock & pop,3,10,bIII,bVII,0.00325
+rock_pop,Rock & pop,3,11,bIII,VII,4e-05
+rock_pop,Rock & pop,4,0,III,I,0.00273
+rock_pop,Rock & pop,4,1,III,bII,0.00014
+rock_pop,Rock & pop,4,2,III,II,0.00711
+rock_pop,Rock & pop,4,3,III,bIII,0.00051
+rock_pop,Rock & pop,4,4,III,III,0.0
+rock_pop,Rock & pop,4,5,III,IV,0.00899
+rock_pop,Rock & pop,4,6,III,#IV,0.00012
+rock_pop,Rock & pop,4,7,III,V,0.00327
+rock_pop,Rock & pop,4,8,III,bVI,4e-05
+rock_pop,Rock & pop,4,9,III,VI,0.01234
+rock_pop,Rock & pop,4,10,III,bVII,0.00028
+rock_pop,Rock & pop,4,11,III,VII,0.00054
+rock_pop,Rock & pop,5,0,IV,I,0.12133
+rock_pop,Rock & pop,5,1,IV,bII,0.00036
+rock_pop,Rock & pop,5,2,IV,II,0.01024
+rock_pop,Rock & pop,5,3,IV,bIII,0.00308
+rock_pop,Rock & pop,5,4,IV,III,0.00805
+rock_pop,Rock & pop,5,5,IV,IV,0.0
+rock_pop,Rock & pop,5,6,IV,#IV,0.0011
+rock_pop,Rock & pop,5,7,IV,V,0.07076
+rock_pop,Rock & pop,5,8,IV,bVI,0.00217
+rock_pop,Rock & pop,5,9,IV,VI,0.00748
+rock_pop,Rock & pop,5,10,IV,bVII,0.00764
+rock_pop,Rock & pop,5,11,IV,VII,0.00013
+rock_pop,Rock & pop,6,0,#IV,I,0.00076
+rock_pop,Rock & pop,6,1,#IV,bII,0.00154
+rock_pop,Rock & pop,6,2,#IV,II,0.00015
+rock_pop,Rock & pop,6,3,#IV,bIII,0.00021
+rock_pop,Rock & pop,6,4,#IV,III,0.00047
+rock_pop,Rock & pop,6,5,#IV,IV,0.00071
+rock_pop,Rock & pop,6,6,#IV,#IV,0.0
+rock_pop,Rock & pop,6,7,#IV,V,0.00073
+rock_pop,Rock & pop,6,8,#IV,bVI,0.00076
+rock_pop,Rock & pop,6,9,#IV,VI,3e-05
+rock_pop,Rock & pop,6,10,#IV,bVII,4e-05
+rock_pop,Rock & pop,6,11,#IV,VII,0.00096
+rock_pop,Rock & pop,7,0,V,I,0.10927
+rock_pop,Rock & pop,7,1,V,bII,0.00028
+rock_pop,Rock & pop,7,2,V,II,0.00867
+rock_pop,Rock & pop,7,3,V,bIII,0.0009
+rock_pop,Rock & pop,7,4,V,III,0.00493
+rock_pop,Rock & pop,7,5,V,IV,0.04534
+rock_pop,Rock & pop,7,6,V,#IV,0.00032
+rock_pop,Rock & pop,7,7,V,V,0.0
+rock_pop,Rock & pop,7,8,V,bVI,0.00142
+rock_pop,Rock & pop,7,9,V,VI,0.01501
+rock_pop,Rock & pop,7,10,V,bVII,0.00385
+rock_pop,Rock & pop,7,11,V,VII,0.00026
+rock_pop,Rock & pop,8,0,bVI,I,0.00212
+rock_pop,Rock & pop,8,1,bVI,bII,0.00159
+rock_pop,Rock & pop,8,2,bVI,II,8e-05
+rock_pop,Rock & pop,8,3,bVI,bIII,0.00149
+rock_pop,Rock & pop,8,4,bVI,III,1e-05
+rock_pop,Rock & pop,8,5,bVI,IV,0.00101
+rock_pop,Rock & pop,8,6,bVI,#IV,0.0008
+rock_pop,Rock & pop,8,7,bVI,V,0.00194
+rock_pop,Rock & pop,8,8,bVI,bVI,0.0
+rock_pop,Rock & pop,8,9,bVI,VI,0.00083
+rock_pop,Rock & pop,8,10,bVI,bVII,0.0033
+rock_pop,Rock & pop,8,11,bVI,VII,0.00033
+rock_pop,Rock & pop,9,0,VI,I,0.01181
+rock_pop,Rock & pop,9,1,VI,bII,5e-05
+rock_pop,Rock & pop,9,2,VI,II,0.01769
+rock_pop,Rock & pop,9,3,VI,bIII,0.0001
+rock_pop,Rock & pop,9,4,VI,III,0.00714
+rock_pop,Rock & pop,9,5,VI,IV,0.02374
+rock_pop,Rock & pop,9,6,VI,#IV,0.00012
+rock_pop,Rock & pop,9,7,VI,V,0.01245
+rock_pop,Rock & pop,9,8,VI,bVI,0.0009
+rock_pop,Rock & pop,9,9,VI,VI,0.0
+rock_pop,Rock & pop,9,10,VI,bVII,0.00178
+rock_pop,Rock & pop,9,11,VI,VII,0.00054
+rock_pop,Rock & pop,10,0,bVII,I,0.02122
+rock_pop,Rock & pop,10,1,bVII,bII,0.0
+rock_pop,Rock & pop,10,2,bVII,II,0.00036
+rock_pop,Rock & pop,10,3,bVII,bIII,0.00181
+rock_pop,Rock & pop,10,4,bVII,III,0.00017
+rock_pop,Rock & pop,10,5,bVII,IV,0.01917
+rock_pop,Rock & pop,10,6,bVII,#IV,0.0
+rock_pop,Rock & pop,10,7,bVII,V,0.00354
+rock_pop,Rock & pop,10,8,bVII,bVI,0.0018
+rock_pop,Rock & pop,10,9,bVII,VI,0.00214
+rock_pop,Rock & pop,10,10,bVII,bVII,0.0
+rock_pop,Rock & pop,10,11,bVII,VII,0.00089
+rock_pop,Rock & pop,11,0,VII,I,0.00091
+rock_pop,Rock & pop,11,1,VII,bII,5e-05
+rock_pop,Rock & pop,11,2,VII,II,0.00021
+rock_pop,Rock & pop,11,3,VII,bIII,0.00018
+rock_pop,Rock & pop,11,4,VII,III,0.00172
+rock_pop,Rock & pop,11,5,VII,IV,0.0003
+rock_pop,Rock & pop,11,6,VII,#IV,0.00136
+rock_pop,Rock & pop,11,7,VII,V,0.00037
+rock_pop,Rock & pop,11,8,VII,bVI,4e-05
+rock_pop,Rock & pop,11,9,VII,VI,0.00046
+rock_pop,Rock & pop,11,10,VII,bVII,0.00019
+rock_pop,Rock & pop,11,11,VII,VII,0.0

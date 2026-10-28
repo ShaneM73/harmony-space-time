@@ -1,0 +1,6 @@
+source,label,pieces,chords,year_min,year_max
+Billboard,"McGill Billboard (chart singles, chord symbols)",876,84413,1958,1991
+DCML,DCML Distant Listening Corpus (expert Roman-numeral analyses),1280,206289,1590,1931
+RockCorpus,Rock Corpus RS200 (expert Roman-numeral analyses),193,18247,1949,2002
+WeimarJazz,Weimar Jazz Database (lead-sheet changes behind recorded solos),412,27945,1925,2007
+WiR,When in Rome corpus (expert Roman-numeral analyses),778,74596,1565,1915

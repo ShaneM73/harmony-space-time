@@ -1,0 +1,121 @@
+era,motion,motion_key,share
+Renaissance (<1600),Step up,stepUp,0.1573
+Renaissance (<1600),Third up,thirdUp,0.0626
+Renaissance (<1600),Third down,thirdDown,0.0935
+Renaissance (<1600),Descending fifth,down5th,0.2973
+Renaissance (<1600),Ascending fifth,up5th,0.2362
+Renaissance (<1600),Step down,stepDown,0.1249
+Renaissance (<1600),Same root,same,0.0194
+Renaissance (<1600),Tritone,tritone,0.0088
+Early Baroque (1600-99),Step down,stepDown,0.1028
+Early Baroque (1600-99),Step up,stepUp,0.1811
+Early Baroque (1600-99),Descending fifth,down5th,0.3361
+Early Baroque (1600-99),Ascending fifth,up5th,0.154
+Early Baroque (1600-99),Tritone,tritone,0.017
+Early Baroque (1600-99),Third down,thirdDown,0.1021
+Early Baroque (1600-99),Same root,same,0.0647
+Early Baroque (1600-99),Third up,thirdUp,0.0422
+Late Baroque (1700-49),Ascending fifth,up5th,0.1281
+Late Baroque (1700-49),Descending fifth,down5th,0.3566
+Late Baroque (1700-49),Step up,stepUp,0.1837
+Late Baroque (1700-49),Same root,same,0.1027
+Late Baroque (1700-49),Tritone,tritone,0.0324
+Late Baroque (1700-49),Third down,thirdDown,0.0908
+Late Baroque (1700-49),Step down,stepDown,0.0788
+Late Baroque (1700-49),Third up,thirdUp,0.0269
+Classical (1750-99),Ascending fifth,up5th,0.1708
+Classical (1750-99),Descending fifth,down5th,0.3562
+Classical (1750-99),Step up,stepUp,0.1794
+Classical (1750-99),Third down,thirdDown,0.0639
+Classical (1750-99),Third up,thirdUp,0.0304
+Classical (1750-99),Same root,same,0.0901
+Classical (1750-99),Tritone,tritone,0.026
+Classical (1750-99),Step down,stepDown,0.0833
+Early Romantic (1800-49),Ascending fifth,up5th,0.1731
+Early Romantic (1800-49),Descending fifth,down5th,0.3266
+Early Romantic (1800-49),Third down,thirdDown,0.073
+Early Romantic (1800-49),Step down,stepDown,0.0786
+Early Romantic (1800-49),Same root,same,0.1281
+Early Romantic (1800-49),Step up,stepUp,0.1461
+Early Romantic (1800-49),Tritone,tritone,0.033
+Early Romantic (1800-49),Third up,thirdUp,0.0415
+Late Romantic (1850-99),Descending fifth,down5th,0.2744
+Late Romantic (1850-99),Ascending fifth,up5th,0.1521
+Late Romantic (1850-99),Same root,same,0.1427
+Late Romantic (1850-99),Third down,thirdDown,0.0928
+Late Romantic (1850-99),Step up,stepUp,0.1441
+Late Romantic (1850-99),Tritone,tritone,0.0439
+Late Romantic (1850-99),Third up,thirdUp,0.0548
+Late Romantic (1850-99),Step down,stepDown,0.0951
+Early 20th c. (1900-49),Ascending fifth,up5th,0.121
+Early 20th c. (1900-49),Descending fifth,down5th,0.2538
+Early 20th c. (1900-49),Third down,thirdDown,0.1045
+Early 20th c. (1900-49),Step up,stepUp,0.1636
+Early 20th c. (1900-49),Same root,same,0.1144
+Early 20th c. (1900-49),Step down,stepDown,0.122
+Early 20th c. (1900-49),Third up,thirdUp,0.0705
+Early 20th c. (1900-49),Tritone,tritone,0.0502
+Jazz: Swing era (<1945),Third down,thirdDown,0.093
+Jazz: Swing era (<1945),Descending fifth,down5th,0.5108
+Jazz: Swing era (<1945),Same root,same,0.0551
+Jazz: Swing era (<1945),Tritone,tritone,0.019
+Jazz: Swing era (<1945),Third up,thirdUp,0.0379
+Jazz: Swing era (<1945),Ascending fifth,up5th,0.093
+Jazz: Swing era (<1945),Step down,stepDown,0.1147
+Jazz: Swing era (<1945),Step up,stepUp,0.0763
+Jazz: Bebop/Hard bop (1945-59),Third down,thirdDown,0.0606
+Jazz: Bebop/Hard bop (1945-59),Step down,stepDown,0.1032
+Jazz: Bebop/Hard bop (1945-59),Descending fifth,down5th,0.5611
+Jazz: Bebop/Hard bop (1945-59),Same root,same,0.0513
+Jazz: Bebop/Hard bop (1945-59),Tritone,tritone,0.026
+Jazz: Bebop/Hard bop (1945-59),Step up,stepUp,0.0798
+Jazz: Bebop/Hard bop (1945-59),Third up,thirdUp,0.0411
+Jazz: Bebop/Hard bop (1945-59),Ascending fifth,up5th,0.0769
+Jazz: Modal/Post-bop (1960-74),Step up,stepUp,0.1694
+Jazz: Modal/Post-bop (1960-74),Descending fifth,down5th,0.416
+Jazz: Modal/Post-bop (1960-74),Step down,stepDown,0.1812
+Jazz: Modal/Post-bop (1960-74),Ascending fifth,up5th,0.0652
+Jazz: Modal/Post-bop (1960-74),Same root,same,0.0448
+Jazz: Modal/Post-bop (1960-74),Third down,thirdDown,0.0519
+Jazz: Modal/Post-bop (1960-74),Tritone,tritone,0.0329
+Jazz: Modal/Post-bop (1960-74),Third up,thirdUp,0.0387
+Jazz: 1975+,Third down,thirdDown,0.0857
+Jazz: 1975+,Descending fifth,down5th,0.5344
+Jazz: 1975+,Same root,same,0.0522
+Jazz: 1975+,Tritone,tritone,0.0237
+Jazz: 1975+,Third up,thirdUp,0.039
+Jazz: 1975+,Step up,stepUp,0.0814
+Jazz: 1975+,Step down,stepDown,0.1124
+Jazz: 1975+,Ascending fifth,up5th,0.0713
+Rock/Pop 1950-64,Same root,same,0.0642
+Rock/Pop 1950-64,Descending fifth,down5th,0.3598
+Rock/Pop 1950-64,Ascending fifth,up5th,0.22
+Rock/Pop 1950-64,Third up,thirdUp,0.0463
+Rock/Pop 1950-64,Step down,stepDown,0.0787
+Rock/Pop 1950-64,Step up,stepUp,0.116
+Rock/Pop 1950-64,Third down,thirdDown,0.1117
+Rock/Pop 1950-64,Tritone,tritone,0.0032
+Rock/Pop 1965-74,Step down,stepDown,0.1388
+Rock/Pop 1965-74,Step up,stepUp,0.1529
+Rock/Pop 1965-74,Ascending fifth,up5th,0.2324
+Rock/Pop 1965-74,Descending fifth,down5th,0.2871
+Rock/Pop 1965-74,Third up,thirdUp,0.0699
+Rock/Pop 1965-74,Same root,same,0.0446
+Rock/Pop 1965-74,Third down,thirdDown,0.0711
+Rock/Pop 1965-74,Tritone,tritone,0.0032
+Rock/Pop 1975-84,Step up,stepUp,0.1888
+Rock/Pop 1975-84,Third up,thirdUp,0.0615
+Rock/Pop 1975-84,Descending fifth,down5th,0.2483
+Rock/Pop 1975-84,Ascending fifth,up5th,0.1946
+Rock/Pop 1975-84,Step down,stepDown,0.1572
+Rock/Pop 1975-84,Same root,same,0.0575
+Rock/Pop 1975-84,Third down,thirdDown,0.0886
+Rock/Pop 1975-84,Tritone,tritone,0.0035
+Rock/Pop 1985+,Third down,thirdDown,0.0985
+Rock/Pop 1985+,Step up,stepUp,0.2013
+Rock/Pop 1985+,Descending fifth,down5th,0.2271
+Rock/Pop 1985+,Step down,stepDown,0.1421
+Rock/Pop 1985+,Ascending fifth,up5th,0.1862
+Rock/Pop 1985+,Same root,same,0.0714
+Rock/Pop 1985+,Third up,thirdUp,0.0724
+Rock/Pop 1985+,Tritone,tritone,0.0009

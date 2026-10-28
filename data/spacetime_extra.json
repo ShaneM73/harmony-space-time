@@ -1,0 +1,998 @@
+{
+ "merges": [
+  {
+   "a": 65,
+   "b": 108,
+   "height": 0.4982057821405773,
+   "size": 2
+  },
+  {
+   "a": 25,
+   "b": 86,
+   "height": 0.5651478578050775,
+   "size": 2
+  },
+  {
+   "a": 87,
+   "b": 93,
+   "height": 0.5796009610774892,
+   "size": 2
+  },
+  {
+   "a": 72,
+   "b": 132,
+   "height": 0.633225862213466,
+   "size": 2
+  },
+  {
+   "a": 46,
+   "b": 51,
+   "height": 0.646434102467771,
+   "size": 2
+  },
+  {
+   "a": 15,
+   "b": 49,
+   "height": 0.6636595725630948,
+   "size": 2
+  },
+  {
+   "a": 16,
+   "b": 105,
+   "height": 0.7125950071764835,
+   "size": 2
+  },
+  {
+   "a": 130,
+   "b": 141,
+   "height": 0.7226465724688406,
+   "size": 3
+  },
+  {
+   "a": 2,
+   "b": 35,
+   "height": 0.742839180788099,
+   "size": 2
+  },
+  {
+   "a": 73,
+   "b": 138,
+   "height": 0.7744381298500221,
+   "size": 3
+  },
+  {
+   "a": 98,
+   "b": 114,
+   "height": 0.7999336431514136,
+   "size": 2
+  },
+  {
+   "a": 6,
+   "b": 89,
+   "height": 0.8329768335996679,
+   "size": 2
+  },
+  {
+   "a": 74,
+   "b": 145,
+   "height": 0.9136402300432653,
+   "size": 4
+  },
+  {
+   "a": 1,
+   "b": 140,
+   "height": 0.9227938413682606,
+   "size": 3
+  },
+  {
+   "a": 84,
+   "b": 91,
+   "height": 0.9486655989365224,
+   "size": 2
+  },
+  {
+   "a": 64,
+   "b": 110,
+   "height": 0.97572152902881,
+   "size": 2
+  },
+  {
+   "a": 40,
+   "b": 50,
+   "height": 0.9875715804410315,
+   "size": 2
+  },
+  {
+   "a": 66,
+   "b": 109,
+   "height": 1.0087851216417514,
+   "size": 2
+  },
+  {
+   "a": 0,
+   "b": 22,
+   "height": 1.0518509021657323,
+   "size": 2
+  },
+  {
+   "a": 42,
+   "b": 79,
+   "height": 1.0568801514350747,
+   "size": 2
+  },
+  {
+   "a": 53,
+   "b": 106,
+   "height": 1.0599123607505343,
+   "size": 2
+  },
+  {
+   "a": 135,
+   "b": 146,
+   "height": 1.0684169414077254,
+   "size": 3
+  },
+  {
+   "a": 5,
+   "b": 18,
+   "height": 1.0747830524304056,
+   "size": 2
+  },
+  {
+   "a": 61,
+   "b": 99,
+   "height": 1.089363791523778,
+   "size": 2
+  },
+  {
+   "a": 112,
+   "b": 147,
+   "height": 1.114390449371998,
+   "size": 3
+  },
+  {
+   "a": 54,
+   "b": 76,
+   "height": 1.1280957217357706,
+   "size": 2
+  },
+  {
+   "a": 11,
+   "b": 127,
+   "height": 1.1307436301605676,
+   "size": 2
+  },
+  {
+   "a": 10,
+   "b": 43,
+   "height": 1.1366742962102951,
+   "size": 2
+  },
+  {
+   "a": 136,
+   "b": 149,
+   "height": 1.152472734398606,
+   "size": 5
+  },
+  {
+   "a": 12,
+   "b": 34,
+   "height": 1.199158330591502,
+   "size": 2
+  },
+  {
+   "a": 47,
+   "b": 142,
+   "height": 1.2037476045421112,
+   "size": 3
+  },
+  {
+   "a": 137,
+   "b": 157,
+   "height": 1.2334285388846782,
+   "size": 5
+  },
+  {
+   "a": 122,
+   "b": 155,
+   "height": 1.248812012832319,
+   "size": 3
+  },
+  {
+   "a": 139,
+   "b": 148,
+   "height": 1.2717191068290714,
+   "size": 6
+  },
+  {
+   "a": 57,
+   "b": 144,
+   "height": 1.2796361737694635,
+   "size": 3
+  },
+  {
+   "a": 32,
+   "b": 88,
+   "height": 1.299911820998361,
+   "size": 2
+  },
+  {
+   "a": 69,
+   "b": 107,
+   "height": 1.3034095805732246,
+   "size": 2
+  },
+  {
+   "a": 58,
+   "b": 63,
+   "height": 1.3055525792535951,
+   "size": 2
+  },
+  {
+   "a": 4,
+   "b": 37,
+   "height": 1.3191630183949927,
+   "size": 2
+  },
+  {
+   "a": 80,
+   "b": 92,
+   "height": 1.3416704171069442,
+   "size": 2
+  },
+  {
+   "a": 21,
+   "b": 152,
+   "height": 1.3525244997847257,
+   "size": 3
+  },
+  {
+   "a": 31,
+   "b": 133,
+   "height": 1.3564477220426943,
+   "size": 2
+  },
+  {
+   "a": 101,
+   "b": 121,
+   "height": 1.3967449654747062,
+   "size": 2
+  },
+  {
+   "a": 33,
+   "b": 120,
+   "height": 1.4133508583067613,
+   "size": 2
+  },
+  {
+   "a": 75,
+   "b": 95,
+   "height": 1.4184974205890217,
+   "size": 2
+  },
+  {
+   "a": 117,
+   "b": 174,
+   "height": 1.4194216612085062,
+   "size": 3
+  },
+  {
+   "a": 48,
+   "b": 159,
+   "height": 1.4245599304288918,
+   "size": 3
+  },
+  {
+   "a": 56,
+   "b": 158,
+   "height": 1.487901561432801,
+   "size": 3
+  },
+  {
+   "a": 164,
+   "b": 169,
+   "height": 1.4948179362303042,
+   "size": 11
+  },
+  {
+   "a": 13,
+   "b": 168,
+   "height": 1.5024284695011538,
+   "size": 4
+  },
+  {
+   "a": 36,
+   "b": 180,
+   "height": 1.5041197365374497,
+   "size": 3
+  },
+  {
+   "a": 153,
+   "b": 165,
+   "height": 1.5138161368609002,
+   "size": 4
+  },
+  {
+   "a": 23,
+   "b": 173,
+   "height": 1.5482973040626056,
+   "size": 3
+  },
+  {
+   "a": 39,
+   "b": 60,
+   "height": 1.5743370633968552,
+   "size": 2
+  },
+  {
+   "a": 102,
+   "b": 166,
+   "height": 1.5772109894958344,
+   "size": 4
+  },
+  {
+   "a": 103,
+   "b": 115,
+   "height": 1.5941639506796372,
+   "size": 2
+  },
+  {
+   "a": 9,
+   "b": 186,
+   "height": 1.6497590049160509,
+   "size": 4
+  },
+  {
+   "a": 52,
+   "b": 184,
+   "height": 1.6783735784418272,
+   "size": 12
+  },
+  {
+   "a": 143,
+   "b": 151,
+   "height": 1.7163480146906194,
+   "size": 5
+  },
+  {
+   "a": 78,
+   "b": 160,
+   "height": 1.719499487317515,
+   "size": 4
+  },
+  {
+   "a": 55,
+   "b": 179,
+   "height": 1.7251149594324053,
+   "size": 3
+  },
+  {
+   "a": 26,
+   "b": 71,
+   "height": 1.7333727200951712,
+   "size": 2
+  },
+  {
+   "a": 111,
+   "b": 182,
+   "height": 1.7795507304824583,
+   "size": 4
+  },
+  {
+   "a": 177,
+   "b": 187,
+   "height": 1.8042008691537545,
+   "size": 6
+  },
+  {
+   "a": 150,
+   "b": 175,
+   "height": 1.8225264438285376,
+   "size": 4
+  },
+  {
+   "a": 3,
+   "b": 183,
+   "height": 1.8914759004208035,
+   "size": 4
+  },
+  {
+   "a": 29,
+   "b": 70,
+   "height": 1.8941947348554204,
+   "size": 2
+  },
+  {
+   "a": 38,
+   "b": 161,
+   "height": 1.9067131739973568,
+   "size": 3
+  },
+  {
+   "a": 67,
+   "b": 123,
+   "height": 1.9247753431689267,
+   "size": 2
+  },
+  {
+   "a": 44,
+   "b": 82,
+   "height": 1.9512335857111274,
+   "size": 2
+  },
+  {
+   "a": 131,
+   "b": 172,
+   "height": 1.9647782014357003,
+   "size": 3
+  },
+  {
+   "a": 8,
+   "b": 119,
+   "height": 1.977135710897087,
+   "size": 2
+  },
+  {
+   "a": 156,
+   "b": 176,
+   "height": 1.9823606566637717,
+   "size": 5
+  },
+  {
+   "a": 126,
+   "b": 163,
+   "height": 2.072421868238038,
+   "size": 3
+  },
+  {
+   "a": 167,
+   "b": 191,
+   "height": 2.1082137026268755,
+   "size": 7
+  },
+  {
+   "a": 97,
+   "b": 192,
+   "height": 2.12612610381264,
+   "size": 5
+  },
+  {
+   "a": 124,
+   "b": 162,
+   "height": 2.1429801229297882,
+   "size": 3
+  },
+  {
+   "a": 154,
+   "b": 189,
+   "height": 2.1903716395112984,
+   "size": 4
+  },
+  {
+   "a": 83,
+   "b": 94,
+   "height": 2.192809722730254,
+   "size": 2
+  },
+  {
+   "a": 190,
+   "b": 201,
+   "height": 2.195710381258022,
+   "size": 8
+  },
+  {
+   "a": 41,
+   "b": 196,
+   "height": 2.209048123997457,
+   "size": 4
+  },
+  {
+   "a": 134,
+   "b": 181,
+   "height": 2.2367532820380136,
+   "size": 4
+  },
+  {
+   "a": 96,
+   "b": 104,
+   "height": 2.3055441783751527,
+   "size": 2
+  },
+  {
+   "a": 68,
+   "b": 193,
+   "height": 2.3200366538757233,
+   "size": 13
+  },
+  {
+   "a": 30,
+   "b": 210,
+   "height": 2.3711375332995765,
+   "size": 8
+  },
+  {
+   "a": 185,
+   "b": 203,
+   "height": 2.4261150610588644,
+   "size": 7
+  },
+  {
+   "a": 118,
+   "b": 129,
+   "height": 2.512851872969585,
+   "size": 2
+  },
+  {
+   "a": 7,
+   "b": 85,
+   "height": 2.532249958641669,
+   "size": 2
+  },
+  {
+   "a": 81,
+   "b": 116,
+   "height": 2.5370016323564166,
+   "size": 2
+  },
+  {
+   "a": 19,
+   "b": 208,
+   "height": 2.5482287055735022,
+   "size": 6
+  },
+  {
+   "a": 20,
+   "b": 77,
+   "height": 2.5685265279875362,
+   "size": 2
+  },
+  {
+   "a": 128,
+   "b": 218,
+   "height": 2.5851253875989175,
+   "size": 3
+  },
+  {
+   "a": 212,
+   "b": 213,
+   "height": 2.601743261722267,
+   "size": 7
+  },
+  {
+   "a": 171,
+   "b": 199,
+   "height": 2.659236224045009,
+   "size": 8
+  },
+  {
+   "a": 170,
+   "b": 194,
+   "height": 2.680344261718733,
+   "size": 8
+  },
+  {
+   "a": 113,
+   "b": 229,
+   "height": 2.7392368628208987,
+   "size": 9
+  },
+  {
+   "a": 59,
+   "b": 178,
+   "height": 2.740494755187677,
+   "size": 3
+  },
+  {
+   "a": 17,
+   "b": 28,
+   "height": 2.808374433530069,
+   "size": 2
+  },
+  {
+   "a": 217,
+   "b": 220,
+   "height": 2.8156368528829074,
+   "size": 12
+  },
+  {
+   "a": 209,
+   "b": 228,
+   "height": 2.908103656568129,
+   "size": 10
+  },
+  {
+   "a": 27,
+   "b": 216,
+   "height": 3.076919811176652,
+   "size": 5
+  },
+  {
+   "a": 219,
+   "b": 230,
+   "height": 3.0782916102603397,
+   "size": 21
+  },
+  {
+   "a": 211,
+   "b": 224,
+   "height": 3.1184956054918045,
+   "size": 7
+  },
+  {
+   "a": 205,
+   "b": 222,
+   "height": 3.144999581935612,
+   "size": 4
+  },
+  {
+   "a": 195,
+   "b": 200,
+   "height": 3.284176200825386,
+   "size": 8
+  },
+  {
+   "a": 207,
+   "b": 236,
+   "height": 3.3019009772675156,
+   "size": 7
+  },
+  {
+   "a": 198,
+   "b": 225,
+   "height": 3.5161142639056817,
+   "size": 10
+  },
+  {
+   "a": 24,
+   "b": 223,
+   "height": 3.553859632194348,
+   "size": 3
+  },
+  {
+   "a": 125,
+   "b": 233,
+   "height": 3.5795492014923376,
+   "size": 3
+  },
+  {
+   "a": 202,
+   "b": 239,
+   "height": 3.6666363924828356,
+   "size": 6
+  },
+  {
+   "a": 204,
+   "b": 235,
+   "height": 3.7177079152518036,
+   "size": 12
+  },
+  {
+   "a": 206,
+   "b": 221,
+   "height": 3.8688323709268135,
+   "size": 10
+  },
+  {
+   "a": 188,
+   "b": 241,
+   "height": 3.9011301288799975,
+   "size": 10
+  },
+  {
+   "a": 227,
+   "b": 243,
+   "height": 4.001513777929852,
+   "size": 6
+  },
+  {
+   "a": 90,
+   "b": 244,
+   "height": 4.062294838392362,
+   "size": 4
+  },
+  {
+   "a": 197,
+   "b": 234,
+   "height": 4.154722636690888,
+   "size": 14
+  },
+  {
+   "a": 215,
+   "b": 231,
+   "height": 4.213552891456173,
+   "size": 17
+  },
+  {
+   "a": 14,
+   "b": 45,
+   "height": 4.303888836085315,
+   "size": 2
+  },
+  {
+   "a": 214,
+   "b": 247,
+   "height": 4.589023418315266,
+   "size": 12
+  },
+  {
+   "a": 232,
+   "b": 248,
+   "height": 4.723128513851059,
+   "size": 13
+  },
+  {
+   "a": 100,
+   "b": 255,
+   "height": 4.775659294476294,
+   "size": 14
+  },
+  {
+   "a": 238,
+   "b": 251,
+   "height": 5.37121984557251,
+   "size": 21
+  },
+  {
+   "a": 226,
+   "b": 254,
+   "height": 5.457560297715037,
+   "size": 14
+  },
+  {
+   "a": 240,
+   "b": 258,
+   "height": 5.893600422236839,
+   "size": 22
+  },
+  {
+   "a": 237,
+   "b": 242,
+   "height": 6.52646524032521,
+   "size": 31
+  },
+  {
+   "a": 62,
+   "b": 249,
+   "height": 6.543031869375337,
+   "size": 7
+  },
+  {
+   "a": 246,
+   "b": 256,
+   "height": 6.872153430654575,
+   "size": 26
+  },
+  {
+   "a": 252,
+   "b": 257,
+   "height": 6.8788683318882935,
+   "size": 38
+  },
+  {
+   "a": 245,
+   "b": 253,
+   "height": 7.426316378196265,
+   "size": 8
+  },
+  {
+   "a": 250,
+   "b": 261,
+   "height": 8.265166151000637,
+   "size": 11
+  },
+  {
+   "a": 262,
+   "b": 265,
+   "height": 10.393213912737098,
+   "size": 37
+  },
+  {
+   "a": 259,
+   "b": 260,
+   "height": 12.750832265803274,
+   "size": 53
+  },
+  {
+   "a": 263,
+   "b": 264,
+   "height": 15.043742701403458,
+   "size": 46
+  },
+  {
+   "a": 266,
+   "b": 267,
+   "height": 15.214426786032169,
+   "size": 90
+  },
+  {
+   "a": 268,
+   "b": 269,
+   "height": 25.06027482730331,
+   "size": 136
+  }
+ ],
+ "leaves": [
+  "Abba",
+  "Anton\u00edn Dvo\u0159\u00e1k",
+  "Arcangelo Corelli",
+  "Art Pepper",
+  "Ben Webster",
+  "Benny Carter",
+  "Benny Goodman",
+  "Billy Idol",
+  "Billy Joel",
+  "Bob Berg",
+  "Bob Dylan",
+  "Bob Seger",
+  "Branford Marsalis",
+  "Brenda Lee",
+  "B\u00e9la Bart\u00f3k",
+  "Carl Philipp Emanuel Bach",
+  "Charlie Parker",
+  "Cheap Trick",
+  "Chet Baker",
+  "Chicago",
+  "Chuck Berry",
+  "Clara Schumann",
+  "Claude Goudimel",
+  "Claudio Monteverdi",
+  "Cliff Richard",
+  "Clifford Brown",
+  "Coleman Hawkins",
+  "Cyndi Lauper",
+  "David Bowie",
+  "David Liebman",
+  "David Murray",
+  "Dexter Gordon",
+  "Dickie Wells",
+  "Dion",
+  "Dizzy Gillespie",
+  "Domenico Scarlatti",
+  "Don Byas",
+  "Don Ellis",
+  "Dr. Hook",
+  "Eagles",
+  "Edvard Grieg",
+  "Elton John",
+  "Elvis Presley",
+  "Eric Clapton",
+  "Eric Dolphy",
+  "Erwin Schulhoff",
+  "Fanny Hensel",
+  "Fats Navarro",
+  "Felix Mendelssohn",
+  "Franz Joseph Haydn",
+  "Franz Liszt",
+  "Franz Schubert",
+  "Fran\u00e7ois Couperin",
+  "Fr\u00e9d\u00e9ric Chopin",
+  "Georg Friedrich H\u00e4ndel",
+  "George Harrison",
+  "Gerry Mulligan",
+  "Giovanni Battista Pergolesi",
+  "Girolamo Frescobaldi",
+  "Gladys Knight & The Pips",
+  "Glen Campbell",
+  "Gustav Mahler",
+  "Heart",
+  "Heinrich Sch\u00fctz",
+  "Hugo Wolf",
+  "Ignaz Pleyel",
+  "J.J. Johnson",
+  "Jackson Browne",
+  "Jacopo Peri",
+  "James Brown",
+  "Joe Henderson",
+  "Joe Lovano",
+  "Johann Christian Bach",
+  "Johann Sebastian Bach",
+  "Johannes Brahms",
+  "John Coltrane",
+  "John Denver",
+  "Johnny Cash",
+  "Johnny Dodds",
+  "Johnny Tillotson",
+  "Josephine Lang",
+  "Joshua Redman",
+  "Kenny Dorham",
+  "Kenny Rogers",
+  "Kid Ory",
+  "Led Zeppelin",
+  "Lee Konitz",
+  "Leopold Ko\u017eeluch",
+  "Lester Young",
+  "Lionel Hampton",
+  "Little River Band",
+  "Louis Armstrong",
+  "Louise Reichardt",
+  "Ludwig van Beethoven",
+  "Marvin Gaye",
+  "Michael Brecker",
+  "Michael Jackson",
+  "Miles Davis",
+  "Milt Jackson",
+  "Nikolai Medtner",
+  "Otis Redding",
+  "Pat Benatar",
+  "Paul Desmond",
+  "Pepper Adams",
+  "Pet Shop Boys",
+  "Phil Woods",
+  "Pyotr Ilyich Tchaikovsky",
+  "Ray Charles",
+  "Robert Schumann",
+  "Roy Eldridge",
+  "Samuel Coleridge-Taylor",
+  "Sergei Rachmaninoff",
+  "Sidney Bechet",
+  "Sonny Rollins",
+  "Sonny Stitt",
+  "Stan Getz",
+  "Steve Coleman",
+  "Steve Lacy",
+  "Stevie Wonder",
+  "The Beach Boys",
+  "The Beatles",
+  "The Commodores",
+  "The Everly Brothers",
+  "The J. Geils Band",
+  "The Miracles",
+  "The Police",
+  "The Righteous Brothers",
+  "The Rolling Stones",
+  "Tina Turner",
+  "Wayne Shorter",
+  "Wilhelm Friedemann Bach",
+  "Wilson Pickett",
+  "Wolfgang Amadeus Mozart",
+  "Woody Shaw",
+  "Wynton Marsalis",
+  "Zoot Sims"
+ ],
+ "loadings": {
+  "pc1": {
+   "seventh_rate": 0.595,
+   "extended_rate": 0.181,
+   "nondiatonic_rate": 0.354,
+   "chromatic_root_rate": 0.243,
+   "V_to_I_share": 0.22,
+   "IV_to_I_share": -0.234,
+   "bVII_to_I_share": -0.089,
+   "dom_resolution": 0.22,
+   "down5th_share": 0.38,
+   "step_share": -0.112,
+   "third_share": -0.092,
+   "chord_entropy": 0.215,
+   "tonic_share": -0.212,
+   "minor_quality_share": 0.119
+  },
+  "pc2": {
+   "seventh_rate": -0.008,
+   "extended_rate": 0.415,
+   "nondiatonic_rate": 0.255,
+   "chromatic_root_rate": 0.351,
+   "V_to_I_share": -0.283,
+   "IV_to_I_share": -0.031,
+   "bVII_to_I_share": 0.237,
+   "dom_resolution": -0.296,
+   "down5th_share": -0.41,
+   "step_share": 0.336,
+   "third_share": 0.171,
+   "chord_entropy": 0.215,
+   "tonic_share": -0.208,
+   "minor_quality_share": 0.12
+  }
+ },
+ "explained": [
+  0.36,
+  0.262
+ ],
+ "nn": {
+  "n": 2058,
+  "same_city_nn": 0.09815354713313897,
+  "same_city_random": 0.1360544217687075,
+  "median_year_gap_nn": 48.0,
+  "median_year_gap_random": 84.0
+ },
+ "km_per_century": 1000.0
+}

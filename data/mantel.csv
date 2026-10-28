@@ -1,0 +1,6 @@
+subset,n_units,r_harmony_time,p_time,r_harmony_geo,p_geo,r_geo_given_time,p_geo_given_time,r_time_given_geo,p_time_given_geo
+all composers and artists (5+ pieces),136,-0.0814,0.9604,0.1563,0.0072,0.1992,0.0008,-0.1488,0.9994
+classical composers only,39,0.2908,0.0144,0.0112,0.3047,-0.0258,0.4469,0.2916,0.0142
+"modern artists only (jazz, rock/pop)",97,0.0696,0.064,0.2187,0.007,0.2251,0.0048,0.0885,0.0328
+jazz performers only,49,0.2236,0.0028,-0.1007,0.8174,-0.1102,0.8454,0.2278,0.0024
+rock/pop artists only,48,0.1681,0.0156,0.1468,0.055,0.1534,0.058,0.174,0.0102
