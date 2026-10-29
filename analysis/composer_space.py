@@ -76,5 +76,6 @@ out = dict(
                     near=[C.unit.iloc[j] for j in np.argsort(D[i])[1:4]]) for i, r in enumerate(C.itertuples())],
 )
 json.dump(out, open(f"{REPO}/data/composer_space.json", "w"), ensure_ascii=False)
+C["conf"] = np.round(conf, 3); C.to_csv(f"{REPO}/data/composer_clusters.csv", index=False)  # deposit membership confidence
 print("silhouette", {k: round(v, 3) for k, v in sil.items()}, "ARI ward-kmeans", round(ari_km, 3), "bootstrap ARI", round(np.mean(aris), 3))
 print("low-confidence members:", sorted([(round(c, 2), C.unit.iloc[i], int(cl[i])) for i, c in enumerate(conf)])[:10])
