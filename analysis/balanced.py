@@ -27,6 +27,6 @@ B = pd.DataFrame(rows)
 order = json.load(open(f"{REPO}/data/summary.json"))["era_order"]
 B["k"] = B.era.map({e: i for i, e in enumerate(order)}); B = B.sort_values("k").drop(columns="k")
 B.to_csv(f"{REPO}/data/balanced_eras.csv", index=False)
-diff = pd.DataFrame({m: (B[m] - B[m + "_full"]).abs() for m in M}, index=B.era)
+diff = pd.DataFrame({m: (B[m] - B[m + "_full"]).abs().values for m in M}, index=B.era)
 print("largest |balanced - full| per measure:"); print(diff.max().round(3).to_string())
 print(B[["era", "n_pieces", "n_composers", "V_to_I_share", "V_to_I_share_full", "seventh_rate", "seventh_rate_full"]].round(3).to_string())
