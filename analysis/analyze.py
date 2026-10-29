@@ -134,7 +134,10 @@ for pid, gfull in df.groupby("piece_id", sort=False):
     piece_rows.append(dict(
         piece_id=pid, source=r0.source, genre=r0.genre, composer=r0.composer, title=r0.title,
         year=int(r0.year), era=era, key_mode=r0.key_mode, n_chords=n,
-        seventh_rate=g.seventh.mean(), extended_rate=g.extended.mean(),
+        # Rock Corpus Roman numerals record sevenths only when salient (4.6% vs 23.5% for the same recordings in
+        # Billboard chord symbols; see robustness.py), so chord-quality rates are "not measured" for that corpus.
+        seventh_rate=g.seventh.mean() if r0.source != "RockCorpus" else float("nan"),
+        extended_rate=g.extended.mean() if r0.source != "RockCorpus" else float("nan"),
         chromatic_root_rate=g.chromatic_root.mean(), nondiatonic_rate=g.nondiatonic.mean(),
         applied_rate=g.applied.mean() if r0.source in ("DCML", "WiR", "RockCorpus") else float("nan"),
         inversion_rate=(g.inversion.fillna(0) > 0).mean() if r0.source != "WeimarJazz" else float("nan"),

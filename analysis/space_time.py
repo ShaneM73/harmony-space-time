@@ -96,6 +96,10 @@ C = P.groupby("unit").filter(lambda g: len(g) >= 5)
 comp = C.groupby("unit").agg(n_pieces=("piece_id", "size"), year=("year", "median"), lat=("lat", "mean"), lon=("lon", "mean"),
                              genre=("genre", lambda s: s.mode().iloc[0]), city=("city", lambda s: s.mode().iloc[0]),
                              **{f: (f, "mean") for f in FEATS}).reset_index()
+# artists represented only in the Rock Corpus have no measured seventh/extension rate: impute the rock/pop unit median
+for f in ["seventh_rate", "extended_rate"]:
+    med = comp.loc[(comp.genre == "rock_pop") & comp[f].notna(), f].median()
+    comp.loc[comp[f].isna(), f] = med
 CZ = (comp[FEATS] - F.mean()) / F.std()
 pca = PCA(n_components=2).fit(CZ.values)
 xy = pca.transform(CZ.values)

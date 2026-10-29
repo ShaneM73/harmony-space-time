@@ -53,11 +53,11 @@
   "metrics": {
    "seventh_rate": {
     "n": 12,
-    "rock_mean": 0.04622876145763469,
+    "rock_mean": 0.046228761457634694,
     "billboard_mean": 0.23534167890159097,
     "mean_diff": 0.18911291744395628,
     "sd_diff": 0.25383468110848545,
-    "r": 0.5520382218721913,
+    "r": 0.5520382218721911,
     "p_wilcoxon": 0.009765625
    },
    "extended_rate": {
@@ -354,11 +354,11 @@
  "mixed_all": {
   "seventh_rate": {
    "slopes": {
-    "classical": 0.1460173224240148,
-    "jazz": 0.12075540960993528,
-    "rock_pop": 0.16212584520226855
+    "classical": 0.1460173221637322,
+    "jazz": 0.12075540512840463,
+    "rock_pop": 0.16212585534276028
    },
-   "composer_sd": 0.19682031338689282
+   "composer_sd": 0.19682031874927133
   },
   "nondiatonic_rate": {
    "slopes": {
@@ -864,28 +864,28 @@
   ]
  },
  "cluster_sensitivity": {
-  "drop seventh_rate": 0.7708971397008495,
-  "drop extended_rate": 0.9289048546161914,
-  "drop nondiatonic_rate": 0.8704795991881125,
-  "drop chromatic_root_rate": 0.8107847099199454,
-  "drop V_to_I_share": 0.8806858224597649,
-  "drop IV_to_I_share": 0.9295241633029567,
-  "drop bVII_to_I_share": 0.7450408388216032,
-  "drop dom_resolution": 0.9541603202293579,
-  "drop down5th_share": 0.8133349735035832,
-  "drop step_share": 0.8842122913140692,
-  "drop third_share": 0.6465994876021746,
-  "drop chord_entropy": 0.7580860909937823,
-  "drop tonic_share": 0.8975356823453414,
-  "drop minor_quality_share": 0.8202273628060944,
-  "no seventh/extension features": 0.5848550005600262,
-  "no chromaticism features": 0.7265968390436393,
-  "no cadence features": 0.7513577682191616,
-  "no root-motion features": 0.6227988492807545,
-  "no distribution features": 0.6852386614574486,
-  "k-means (k=6)": 0.7536794168269213,
-  "average linkage (k=6)": 0.06444955691690156,
-  "complete linkage (k=6)": 0.3771883379733215,
-  "strict no-chord profiles": 0.9806909302586059
+  "drop seventh_rate": 0.7038661377224348,
+  "drop extended_rate": 0.9315968055821645,
+  "drop nondiatonic_rate": 0.7762897616061853,
+  "drop chromatic_root_rate": 0.8222161844532718,
+  "drop V_to_I_share": 0.9082044922636753,
+  "drop IV_to_I_share": 0.9062427407443517,
+  "drop bVII_to_I_share": 0.7223525166877143,
+  "drop dom_resolution": 0.8641597853151848,
+  "drop down5th_share": 0.8663166323712865,
+  "drop step_share": 0.8962980327450586,
+  "drop third_share": 0.9808339049781301,
+  "drop chord_entropy": 0.728770831349944,
+  "drop tonic_share": 0.8930428205535295,
+  "drop minor_quality_share": 0.8425221951714097,
+  "no seventh/extension features": 0.6284515769058936,
+  "no chromaticism features": 0.8073143746666365,
+  "no cadence features": 0.7693914146044335,
+  "no root-motion features": 0.7212970145440238,
+  "no distribution features": 0.6343449612218058,
+  "k-means (k=6)": 0.7122971391044615,
+  "average linkage (k=6)": 0.09089165777278166,
+  "complete linkage (k=6)": 0.24577566285478547,
+  "strict no-chord profiles": 0.8741090507831324
  }
 }

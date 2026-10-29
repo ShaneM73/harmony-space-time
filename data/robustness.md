@@ -95,26 +95,26 @@ Largest change in any share across all eras: 0.006.
 
 | Variant | ARI |
 | --- | --- |
-| drop seventh_rate | 0.77 |
+| drop seventh_rate | 0.70 |
 | drop extended_rate | 0.93 |
-| drop nondiatonic_rate | 0.87 |
-| drop chromatic_root_rate | 0.81 |
-| drop V_to_I_share | 0.88 |
-| drop IV_to_I_share | 0.93 |
-| drop bVII_to_I_share | 0.75 |
-| drop dom_resolution | 0.95 |
-| drop down5th_share | 0.81 |
-| drop step_share | 0.88 |
-| drop third_share | 0.65 |
-| drop chord_entropy | 0.76 |
-| drop tonic_share | 0.90 |
-| drop minor_quality_share | 0.82 |
-| no seventh/extension features | 0.58 |
-| no chromaticism features | 0.73 |
-| no cadence features | 0.75 |
-| no root-motion features | 0.62 |
-| no distribution features | 0.69 |
-| k-means (k=6) | 0.75 |
-| average linkage (k=6) | 0.06 |
-| complete linkage (k=6) | 0.38 |
-| strict no-chord profiles | 0.98 |
+| drop nondiatonic_rate | 0.78 |
+| drop chromatic_root_rate | 0.82 |
+| drop V_to_I_share | 0.91 |
+| drop IV_to_I_share | 0.91 |
+| drop bVII_to_I_share | 0.72 |
+| drop dom_resolution | 0.86 |
+| drop down5th_share | 0.87 |
+| drop step_share | 0.90 |
+| drop third_share | 0.98 |
+| drop chord_entropy | 0.73 |
+| drop tonic_share | 0.89 |
+| drop minor_quality_share | 0.84 |
+| no seventh/extension features | 0.63 |
+| no chromaticism features | 0.81 |
+| no cadence features | 0.77 |
+| no root-motion features | 0.72 |
+| no distribution features | 0.63 |
+| k-means (k=6) | 0.71 |
+| average linkage (k=6) | 0.09 |
+| complete linkage (k=6) | 0.25 |
+| strict no-chord profiles | 0.87 |

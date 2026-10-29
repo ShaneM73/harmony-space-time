@@ -31,6 +31,16 @@ PAIRS = ["be_my_baby", "born_to_be_wild", "eight_miles_high", "help", "honky_ton
          "maggie_may", "sunshine_of_your_love", "the_sounds_of_silence", "will_you_love_me_tomorrow", "with_or_without_you"]
 BB = P[P.source == "Billboard"].copy(); norm = lambda s: re.sub(r"[^a-z0-9 ]", "", str(s).lower().replace("&", "and"))
 BB["tkey"] = BB.title.map(norm); BB["akey"] = BB.composer.map(norm)
+# seventh/extension rates are "not measured" for Rock Corpus pieces in pieces.csv (see analyze.py); recompute them here from the events
+ev = pd.read_csv(f"{REPO}/data/chords_modern.csv", usecols=["piece_id", "source", "root_pc", "quality", "ext", "applied"]) if os.path.exists(f"{REPO}/data/chords_modern.csv") else None
+if ev is not None:
+    ev = ev[ev.source == "RockCorpus"].copy()
+    key = ev.piece_id.astype(str) + "|" + ev.root_pc.astype(str) + "|" + ev.quality.astype(str) + "|" + ev.ext.astype(str) + "|" + ev.applied.astype(str)
+    ev = ev[key != key.shift()]  # merge consecutive repeats as analyze.py does
+    ev["seventh"] = ev.ext.isin(["7", "9+"]); ev["extended"] = ev.ext == "9+"
+    rs = ev.groupby("piece_id")[["seventh", "extended"]].mean()
+    for col, src in [("seventh_rate", "seventh"), ("extended_rate", "extended")]:
+        P.loc[P.piece_id.isin(rs.index), col] = P.loc[P.piece_id.isin(rs.index), "piece_id"].map(rs[src])
 rows = []
 for stem in PAIRS:
     a = P[P.piece_id == f"rs200:{stem}"].iloc[0]
