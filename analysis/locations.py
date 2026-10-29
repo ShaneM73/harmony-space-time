@@ -102,7 +102,7 @@ COMPOSER_TIMELINE = {
     "Samuel Coleridge-Taylor": [(0, "London")],
     "Gustav Mahler": [(0, "Vienna")],
     "Claude Debussy": [(0, "Paris")],
-    "Nikolai Medtner": [(0, "Moscow"), (1922, "Berlin"), (1925, "Paris"), (1936, "London")],
+    "Nikolai Medtner": [(0, "Moscow"), (1921, "Berlin"), (1924, "Paris"), (1935, "London")],
     "Béla Bartók": [(0, "Budapest")],
     "Harry Thacker Burleigh": [(0, "New York")],
     "Francis Poulenc": [(0, "Paris")],
@@ -123,6 +123,14 @@ JAZZ = {
     "Harry Edison": [(0, "New York"), (1950, "Los Angeles")], "Don Ellis": [(0, "New York"), (1965, "Los Angeles")],
     "Steve Lacy": [(0, "New York"), (1970, "Paris")], "Kenny Wheeler": [(0, "London")], "Pat Martino": [(0, "Philadelphia")],
     "Von Freeman": [(0, "Chicago")], "Pat Metheny": [(0, "New York")],
+    # verified corrections (see data/locations_sources.csv)
+    "Benny Goodman": [(0, "Chicago"), (1937, "New York")],
+    "Charlie Parker": [(0, "New York"), (1946, "Los Angeles"), (1947, "New York")],
+    "Clifford Brown": [(0, "Los Angeles"), (1955, "New York")],
+    "Joe Henderson": [(0, "New York"), (1971, "San Francisco")],
+    "Pepper Adams": [(0, "Los Angeles"), (1958, "New York")],
+    "Rex Stewart": [(0, "Paris")],
+    "Roy Eldridge": [(0, "Chicago"), (1939, "New York"), (1950, "Paris")],
 }
 JAZZ_DEFAULT = "New York"
 
@@ -178,7 +186,29 @@ POP = {
     "eric carmen": "Cleveland", "queensryche": "Seattle", "foghat": "London", "leslie gore": "New York", "cher": "Los Angeles", "nitty gritty dirt band": "Los Angeles", "bananarama": "London",
     "depeche mode": "London", "wednesday": "Toronto", "r dean tayloy": "Detroit", "doobie brothers": "San Francisco",
 }
+POP.update({  # verified corrections (see data/locations_sources.csv); a list is a timeline like COMPOSER_TIMELINE
+    "beatles": [(0, "Liverpool"), (1963, "London")],
+    "rolling stones": [(0, "London"), (1971, "Los Angeles"), (1974, "Munich"), (1977, "Paris")],
+    "james brown": [(0, "Macon"), (1964, "New York")],
+    "chicago": "Los Angeles",
+    "25 or 6 to 4": "Los Angeles",
+    "everly brothers": [(0, "Nashville"), (1961, "Los Angeles")],
+    "heart": [(0, "Vancouver"), (1977, "Seattle")],
+    "stevie wonder": [(0, "Detroit"), (1971, "New York"), (1974, "Los Angeles")],
+    "john denver": "Aspen",
+    "tina turner": "London",
+    "dr. hook": "Nashville",
+    "gladys knight & the pips": [(0, "New York"), (1966, "Detroit"), (1973, "New York")],
+    "marvin gaye": [(0, "Detroit"), (1972, "Los Angeles")],
+    "marvin gaye & tammy terrell": "Detroit",
+    "bob dylan": [(0, "New York"), (1966, "Nashville"), (1970, "New York"), (1978, "Los Angeles")],
+    "billy idol": "New York",
+    "david bowie": [(0, "London"), (1974, "New York"), (1975, "Los Angeles"), (1976, "Berlin"), (1979, "New York")],
+    "wilson pickett": [(0, "Memphis"), (1966, "Muscle Shoals"), (1970, "Philadelphia"), (1971, "Muscle Shoals")],
+    "johnny cash": [(0, "Memphis"), (1961, "Los Angeles")],
+})
 CITY["Milan"] = (45.46, 9.19, "Italy")
+CITY["Aspen"] = (39.19, -106.82, "USA"); CITY["Vancouver"] = (49.28, -123.12, "Canada")
 
 
 def _timeline(tl, year):
@@ -207,6 +237,8 @@ def locate(row):
         city = POP.get(key)
         if city is None:
             return (None, None, None, None, None)
+        if isinstance(city, list):
+            city = _timeline(city, year)
         conf = "medium" if src == "RockCorpus" else "low"
     lat, lon, country = CITY[city]
     return (city, country, lat, lon, conf)
