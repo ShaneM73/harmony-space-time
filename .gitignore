@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 build/
 corpora/
+corpora
+data/chords_*.csv
+data/strict_chords_*.csv
+data/strict_pieces.csv
