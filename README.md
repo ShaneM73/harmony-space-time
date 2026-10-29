@@ -13,7 +13,7 @@ The authentic cadence is a plateau: V prepares 62–67% of tonic arrivals from 1
 (47% → 34%) as IV→I and bVII→I take over. Chromaticism is flat (20–24%) from Corelli to Schubert, then 29% after 1850 and 40% after 1900.
 Vocabulary is constant (about 14 chord types per 40 chords) from 1600 to 1900 while transition entropy rises by a full bit. Classical and jazz run on
 descending fifths; 20th-century classical music and post-1965 rock both switch to steps and thirds. In the space-time frame, harmony tracks time in
-every genre (Mantel r = 0.29 classical, 0.22 jazz, 0.17 rock, all p < 0.02) and tracks geography only weakly in rock (r = 0.15, p ≈ 0.06), not at all in
+every genre (Mantel r = 0.29 classical, 0.22 jazz, 0.17 rock, all p < 0.02) and tracks geography only weakly in rock (r = 0.12, p ≈ 0.08), not at all in
 classical music or jazz once time is controlled.
 
 ## Repository layout

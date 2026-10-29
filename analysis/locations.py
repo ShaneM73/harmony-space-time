@@ -102,7 +102,7 @@ COMPOSER_TIMELINE = {
     "Samuel Coleridge-Taylor": [(0, "London")],
     "Gustav Mahler": [(0, "Vienna")],
     "Claude Debussy": [(0, "Paris")],
-    "Nikolai Medtner": [(0, "Moscow"), (1921, "Berlin"), (1924, "Paris"), (1935, "London")],
+    "Nikolai Medtner": [(0, "Moscow"), (1922, "Berlin"), (1925, "Paris"), (1936, "London")],
     "Béla Bartók": [(0, "Budapest")],
     "Harry Thacker Burleigh": [(0, "New York")],
     "Francis Poulenc": [(0, "Paris")],
@@ -123,14 +123,6 @@ JAZZ = {
     "Harry Edison": [(0, "New York"), (1950, "Los Angeles")], "Don Ellis": [(0, "New York"), (1965, "Los Angeles")],
     "Steve Lacy": [(0, "New York"), (1970, "Paris")], "Kenny Wheeler": [(0, "London")], "Pat Martino": [(0, "Philadelphia")],
     "Von Freeman": [(0, "Chicago")], "Pat Metheny": [(0, "New York")],
-    # verified corrections (see data/locations_sources.csv)
-    "Benny Goodman": [(0, "Chicago"), (1937, "New York")],
-    "Charlie Parker": [(0, "New York"), (1946, "Los Angeles"), (1947, "New York")],
-    "Clifford Brown": [(0, "Los Angeles"), (1955, "New York")],
-    "Joe Henderson": [(0, "New York"), (1971, "San Francisco")],
-    "Pepper Adams": [(0, "Los Angeles"), (1958, "New York")],
-    "Rex Stewart": [(0, "Paris")],
-    "Roy Eldridge": [(0, "Chicago"), (1939, "New York"), (1950, "Paris")],
 }
 JAZZ_DEFAULT = "New York"
 
@@ -186,29 +178,37 @@ POP = {
     "eric carmen": "Cleveland", "queensryche": "Seattle", "foghat": "London", "leslie gore": "New York", "cher": "Los Angeles", "nitty gritty dirt band": "Los Angeles", "bananarama": "London",
     "depeche mode": "London", "wednesday": "Toronto", "r dean tayloy": "Detroit", "doobie brothers": "San Francisco",
 }
-POP.update({  # verified corrections (see data/locations_sources.csv); a list is a timeline like COMPOSER_TIMELINE
-    "beatles": [(0, "Liverpool"), (1963, "London")],
-    "rolling stones": [(0, "London"), (1971, "Los Angeles"), (1974, "Munich"), (1977, "Paris")],
-    "james brown": [(0, "Macon"), (1964, "New York")],
-    "chicago": "Los Angeles",
-    "25 or 6 to 4": "Los Angeles",
-    "everly brothers": [(0, "Nashville"), (1961, "Los Angeles")],
-    "heart": [(0, "Vancouver"), (1977, "Seattle")],
-    "stevie wonder": [(0, "Detroit"), (1971, "New York"), (1974, "Los Angeles")],
-    "john denver": "Aspen",
-    "tina turner": "London",
-    "dr. hook": "Nashville",
-    "gladys knight & the pips": [(0, "New York"), (1966, "Detroit"), (1973, "New York")],
-    "marvin gaye": [(0, "Detroit"), (1972, "Los Angeles")],
-    "marvin gaye & tammy terrell": "Detroit",
-    "bob dylan": [(0, "New York"), (1966, "Nashville"), (1970, "New York"), (1978, "Los Angeles")],
-    "billy idol": "New York",
-    "david bowie": [(0, "London"), (1974, "New York"), (1975, "Los Angeles"), (1976, "Berlin"), (1979, "New York")],
-    "wilson pickett": [(0, "Memphis"), (1966, "Muscle Shoals"), (1970, "Philadelphia"), (1971, "Muscle Shoals")],
-    "johnny cash": [(0, "Memphis"), (1961, "Los Angeles")],
-})
 CITY["Milan"] = (45.46, 9.19, "Italy")
-CITY["Aspen"] = (39.19, -106.82, "USA"); CITY["Vancouver"] = (49.28, -123.12, "Canada")
+
+
+# ---- verified overrides: data/locations_sources.csv is the authority (one row per musician, with a cited source).
+# Rows with status confirmed/corrected supply the timeline; new cities carry Country|lat|lon.
+def _parse_timeline(txt):
+    out = []
+    for part in str(txt).split(";"):
+        k, _, city = part.strip().partition(":")
+        out.append((0 if k.strip() == "start" else int(k.strip().replace("from", "")), city.strip()))
+    return out
+
+def _load_verified():
+    path = f"{REPO}/data/locations_sources.csv"
+    if not _os.path.exists(path):
+        return {}
+    V = pd.read_csv(path)
+    for r in V[V.new_city_latlon.notna()].itertuples():
+        country, lat, lon = str(r.new_city_latlon).split("|")
+        for _, c in _parse_timeline(r.timeline):
+            if c not in CITY:
+                CITY[c] = (round(float(lat), 2), round(float(lon), 2), country)
+    STATUS.update({(r.genre, r.name): r.status for r in V.itertuples()})
+    return {(r.genre, r.name): _parse_timeline(r.timeline) for r in V.itertuples() if r.status in ("confirmed", "corrected")}
+
+STATUS = {}
+VERIFIED = _load_verified()
+# confidence: classical high (medium if the source left it uncertain); jazz/pop medium when verified, low otherwise
+def _conf(genre, name, base):
+    st = STATUS.get((genre, name))
+    return {"confirmed": base, "corrected": base}.get(st, "medium" if base == "high" else "low")
 
 
 def _timeline(tl, year):
@@ -223,23 +223,22 @@ def locate(row):
     """row has composer, year, source, genre -> (city, country, lat, lon, confidence)"""
     src = row["source"]; name = row["composer"]; year = int(row["year"])
     if src in ("DCML", "WiR"):
-        tl = COMPOSER_TIMELINE.get(name)
+        tl = VERIFIED.get(("classical", name)) or COMPOSER_TIMELINE.get(name)
         if tl is None:
             return (None, None, None, None, None)
-        city, conf = _timeline(tl, year), "high"
+        city, conf = _timeline(tl, year), _conf("classical", name, "high")
     elif src == "WeimarJazz":
-        tl = JAZZ.get(name)
-        city, conf = (_timeline(tl, year) if tl else JAZZ_DEFAULT), ("medium" if tl else "medium")
+        tl = VERIFIED.get(("jazz", name)) or JAZZ.get(name)
+        city, conf = (_timeline(tl, year) if tl else JAZZ_DEFAULT), _conf("jazz", name, "medium")
     else:
         key = str(name).lower().strip()
         if key.startswith("the "):
             key = key[4:]
-        city = POP.get(key)
+        tl = VERIFIED.get(("rock_pop", name))
+        city = _timeline(tl, year) if tl else POP.get(key)
         if city is None:
             return (None, None, None, None, None)
-        if isinstance(city, list):
-            city = _timeline(city, year)
-        conf = "medium" if src == "RockCorpus" else "low"
+        conf = _conf("rock_pop", name, "medium")
     lat, lon, country = CITY[city]
     return (city, country, lat, lon, conf)
 

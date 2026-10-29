@@ -989,8 +989,8 @@
  ],
  "nn": {
   "n": 2058,
-  "same_city_nn": 0.09815354713313897,
-  "same_city_random": 0.1360544217687075,
+  "same_city_nn": 0.09912536443148688,
+  "same_city_random": 0.13702623906705538,
   "median_year_gap_nn": 48.0,
   "median_year_gap_random": 84.0
  },
