@@ -7,11 +7,12 @@ import os as _os
 REPO = _os.environ.get("HARMONY_ROOT", _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import csv, glob, json, os, re, sqlite3
+STRICT_NC = os.environ.get("STRICT_NC") == "1"
 import pandas as pd
 from common import COLUMNS, is_diatonic, pitch_class
 
 P = f"{REPO}/corpora/choco/partitions"
-OUT = f"{REPO}/data/chords_modern.csv"
+OUT = f"{REPO}/data/" + os.environ.get("HARMONY_OUT_SUFFIX", "") + "chords_modern.csv"
 rows = []
 
 
@@ -21,6 +22,7 @@ def emit(**kw):
 
 def infer_mode(events):
     """major/minor from the quality of chords built on the tonic."""
+    events = [e for e in events if e["quality"] != "nc"]
     maj = sum(1 for e in events if e["root_pc"] == 0 and e["quality"] == "maj")
     mn = sum(1 for e in events if e["root_pc"] == 0 and e["quality"] == "min")
     return "minor" if mn > maj else "major"
@@ -29,7 +31,7 @@ def infer_mode(events):
 def finalize(events, **meta):
     mode = infer_mode(events)
     for i, e in enumerate(events):
-        e["chromatic_root"] = not is_diatonic(e["root_pc"], mode)
+        e["chromatic_root"] = False if e["quality"] == "nc" else not is_diatonic(e["root_pc"], mode)
         emit(idx=i, key_mode=mode, **e, **meta)
 
 
@@ -190,7 +192,7 @@ def load_billboard():
             elif "|" in line and tonic is not None:
                 body = line.split("\t", 1)[1] if "\t" in line else line
                 bars = [b.strip() for b in body.split("|")]
-                bars = [b for b in bars if b and not b.startswith(",") and ":" in b or b == "." or (b and b[0] in "ABCDEFG")]
+                bars = [b for b in bars if b and not b.startswith(",") and (":" in b or (STRICT_NC and "N" in b.split())) or b == "." or (b and b[0] in "ABCDEFG")]
                 for bar in bars:
                     toks = bar.split()
                     toks = [t for t in toks if t != "" and not t.startswith("(")]
@@ -200,6 +202,9 @@ def load_billboard():
                     for t in toks:
                         if t == ".":
                             if events: events[-1]["dur"] += beats_per_bar / k
+                            continue
+                        if STRICT_NC and t == "N":
+                            events.append(dict(root_pc=-1, quality="nc", ext="triad", seventh_type="", applied=False, inversion=0, dur=beats_per_bar / k, cadence="", label="N"))
                             continue
                         f = harte(t)
                         if f is None or f["root"] is None:
@@ -259,12 +264,16 @@ def load_weimar():
         events = []
         prev = None
         for onset, bar, beat, chord, sig in beats:
-            if not chord or chord == "NC":
+            if not chord or (chord == "NC" and not STRICT_NC):
                 continue
             try: bpb = int(str(sig).split("/")[0]) if sig else 4
             except ValueError: bpb = 4
             onset = bar * bpb + beat  # position in beats
             if chord == prev:
+                continue
+            if chord == "NC":
+                if events: events[-1]["dur"] = onset - events[-1]["_t"]
+                events.append(dict(root_pc=-1, quality="nc", ext="triad", seventh_type="", applied=False, inversion=0, dur=None, cadence="", label="NC", _t=onset)); prev = chord
                 continue
             f = jazz_chord(chord)
             if f is None or f["root"] is None:

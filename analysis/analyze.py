@@ -3,16 +3,17 @@ Outputs: out/pieces.csv (per-piece metrics) and out/summary.json (aggregates for
 import os as _os
 REPO = _os.environ.get("HARMONY_ROOT", _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
-import json, math
+import json, math, os
 from collections import Counter, defaultdict
 import numpy as np
 import pandas as pd
 from common import era_for, ERA_ORDER
 
 OUT = f"{REPO}/data"
+SUF = os.environ.get("HARMONY_OUT_SUFFIX", "")
 rng = np.random.default_rng(7)
 
-df = pd.concat([pd.read_csv(f"{OUT}/chords_{s}.csv") for s in ("dcml", "wir", "modern")], ignore_index=True)
+df = pd.concat([pd.read_csv(f"{OUT}/{SUF if s != 'wir' else ''}chords_{s}.csv") for s in ("dcml", "wir", "modern")], ignore_index=True)
 df = df[df.year.notna()].copy()
 df["year"] = df.year.astype(int)
 
@@ -39,6 +40,8 @@ DIA_MIN = {0: "min", 2: "dim", 3: "maj", 5: "min", 7: "maj|min", 8: "maj", 10: "
 
 
 def nondiatonic(root, q, mode):
+    if q == "nc":
+        return False
     tab = DIA_MIN if mode == "minor" else DIA_MAJ
     if root not in tab:
         return True
@@ -54,6 +57,8 @@ ROMAN_MIN = {0: "I", 1: "bII", 2: "II", 3: "III", 4: "#III", 5: "IV", 6: "#IV", 
 
 
 def roman(root, q, mode):
+    if q == "nc":
+        return "NC"
     r = (ROMAN_MIN if mode == "minor" else ROMAN_MAJ)[int(root)]
     if q in ("min", "dim"):
         r = r.lower()
@@ -95,7 +100,8 @@ piece_rows = []
 trans_by_era = defaultdict(Counter)       # era -> Counter((from_label,to_label))
 chords_by_era = defaultdict(Counter)      # era -> Counter(label)
 motion_by_era = defaultdict(Counter)
-for pid, g in df.groupby("piece_id", sort=False):
+for pid, gfull in df.groupby("piece_id", sort=False):
+    g = gfull[gfull.quality != "nc"]          # no-chord stretches never count as chords ...
     n = len(g)
     if n < 8:
         continue
@@ -105,16 +111,19 @@ for pid, g in df.groupby("piece_id", sort=False):
     labels = g.chord_label.values
     era = r0.era
     chords_by_era[era].update(labels)
-    # transitions
+    # transitions: ... and in strict mode they break the sequence, so no move is counted across them
+    fr = gfull.root_pc.astype(int).values; fq = gfull.quality.values; fl = gfull.chord_label.values
     into_tonic = Counter(); from_dom = Counter(); motions = Counter(); trans = Counter()
-    for i in range(1, n):
-        a, b = roots[i - 1], roots[i]
+    for i in range(1, len(gfull)):
+        if fq[i] == "nc" or fq[i - 1] == "nc":
+            continue
+        a, b = fr[i - 1], fr[i]
         mv = (b - a) % 12
         motions[MOTION[mv]] += 1
-        trans[(labels[i - 1], labels[i])] += 1
-        if b == 0 and quals[i] in ("maj", "min", "power", "sus"):
+        trans[(fl[i - 1], fl[i])] += 1
+        if b == 0 and fq[i] in ("maj", "min", "power", "sus"):
             into_tonic[a] += 1
-        if a == 7 and quals[i - 1] in ("maj",):
+        if a == 7 and fq[i - 1] in ("maj",):
             from_dom[b] += 1
     trans_by_era[era].update(trans)
     motion_by_era[era].update(motions)
@@ -146,7 +155,7 @@ for pid, g in df.groupby("piece_id", sort=False):
     ))
 
 P = pd.DataFrame(piece_rows)
-P.to_csv(f"{OUT}/pieces.csv", index=False)
+P.to_csv(f"{OUT}/{SUF}pieces.csv", index=False)
 print(P.shape)
 
 METRICS = ["seventh_rate", "extended_rate", "chromatic_root_rate", "nondiatonic_rate", "applied_rate",
@@ -227,7 +236,7 @@ summary = dict(eras=eras, series=series, composers=comp, top_chords=top_chords, 
                totals=dict(pieces=int(len(P)), chords=int(P.n_chords.sum()),
                            by_source=P.groupby("source").agg(pieces=("piece_id", "size"), chords=("n_chords", "sum"),
                                                               ymin=("year", "min"), ymax=("year", "max")).reset_index().to_dict("records")))
-json.dump(summary, open(f"{OUT}/summary.json", "w"), default=lambda o: float(o) if isinstance(o, (np.floating, np.integer)) else str(o))
-pd.DataFrame([{k: (v[0] if isinstance(v, list) else v) for k, v in r.items()} for r in eras]).to_csv(f"{OUT}/era_summary.csv", index=False)
+json.dump(summary, open(f"{OUT}/{SUF}summary.json", "w"), default=lambda o: float(o) if isinstance(o, (np.floating, np.integer)) else str(o))
+pd.DataFrame([{k: (v[0] if isinstance(v, list) else v) for k, v in r.items()} for r in eras]).to_csv(f"{OUT}/{SUF}era_summary.csv", index=False)
 print(pd.DataFrame([{k: (round(v[0], 3) if isinstance(v, list) else v) for k, v in r.items()} for r in eras])[
     ["group", "n_pieces", "seventh_rate", "extended_rate", "chromatic_root_rate", "nondiatonic_rate", "V_to_I_share", "IV_to_I_share", "bVII_to_I_share", "dom_resolution", "down5th_share", "chord_entropy", "vocab40", "beats_per_chord"]].to_string())

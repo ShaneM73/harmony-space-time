@@ -3,11 +3,12 @@ import os as _os
 REPO = _os.environ.get("HARMONY_ROOT", _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
 
 import glob, os, sys
+STRICT_NC = os.environ.get("STRICT_NC") == "1"
 import pandas as pd
 from common import COLUMNS, is_diatonic
 
 ROOT = sys.argv[1] if len(sys.argv) > 1 else f"{REPO}/corpora/dlc"
-OUT = sys.argv[2] if len(sys.argv) > 2 else f"{REPO}/data/chords_dcml.csv"
+OUT = sys.argv[2] if len(sys.argv) > 2 else f"{REPO}/data/" + os.environ.get("HARMONY_OUT_SUFFIX", "") + "chords_dcml.csv"
 
 QUAL = {  # chord_type -> (quality, seventh_type)
     "M": ("maj", ""), "m": ("min", ""), "o": ("dim", ""), "+": ("aug", ""),
@@ -41,6 +42,11 @@ for f in sorted(glob.glob(os.path.join(ROOT, "*/harmonies/*.harmonies.tsv"))):
     i = 0
     for r in d.itertuples(index=False):
         ct = r.chord_type
+        if STRICT_NC and r.chord == "@none":
+            rows.append(dict(source="DCML", genre="classical", piece_id=f"dcml:{corpus}/{piece}", composer=composer, title=title, year=year, key_mode=gmode,
+                             idx=i, root_pc=-1, quality="nc", ext="triad", seventh_type="", chromatic_root=False, applied=False, inversion=0,
+                             dur=float(r.duration_qb) if r.duration_qb else None, cadence="", label="@none")); i += 1
+            continue
         if ct == "" or r.numeral == "" or r.chord in ("@none", ""):
             continue
         q, s7 = QUAL.get(ct, ("other", ""))
